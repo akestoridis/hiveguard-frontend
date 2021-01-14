@@ -66,6 +66,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: path.join(SRC_DIR, 'index.html'),
       inject: true,
+      favicon: path.join(SRC_DIR, 'favicon.ico'),
       minify: {
         collapseWhitespace: true,
         removeComments: false,
