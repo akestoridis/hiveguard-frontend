@@ -1,0 +1,59 @@
+{
+  "name": "hiveguard-frontend",
+  "version": "0.0.0",
+  "description": "Frontend for HiveGuard",
+  "scripts": {
+    "clean": "node cleaner.js",
+    "prebuild": "node cleaner.js",
+    "build": "webpack --config webpack.prod.js",
+    "prestart:dev": "node cleaner.js",
+    "start:dev": "webpack serve --config webpack.dev.js",
+    "prebuild:dev": "node cleaner.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "lint": "npx eslint . --ext .js,.jsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akestoridis/hiveguard-frontend.git"
+  },
+  "keywords": [
+    "Zigbee",
+    "network",
+    "security",
+    "monitoring"
+  ],
+  "author": "Dimitrios-Georgios Akestoridis",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/akestoridis/hiveguard-frontend/issues"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.4.3",
+    "react-dom": "^17.0.1",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^4.5.1",
+    "rimraf": "^3.0.2",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.1.1",
+    "webpack": "^5.14.0",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  }
+}
