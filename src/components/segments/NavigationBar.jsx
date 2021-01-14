@@ -8,12 +8,21 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { LinkContainer } from 'react-router-bootstrap';
+import logo from '../hiveguard-logo.svg';
 
 function NavigationBar() {
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
       <LinkContainer exact to="/">
         <Navbar.Brand>
+          <img
+            src={logo}
+            width="30"
+            height="30"
+            alt=""
+            className="d-inline-block align-top"
+          />
+          {' '}
           HiveGuard
         </Navbar.Brand>
       </LinkContainer>
