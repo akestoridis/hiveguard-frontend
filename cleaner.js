@@ -22,3 +22,9 @@ rimraf(path.join(__dirname, 'dist'), (err) => {
     throw err;
   }
 });
+
+rimraf(path.join(__dirname, 'src', 'components', 'metadata.json'), (err) => {
+  if (err) {
+    throw err;
+  }
+});

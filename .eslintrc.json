@@ -22,6 +22,7 @@
       "error", {
         "devDependencies": [
           "cleaner.js",
+          "prebuilder.js",
           "webpack.common.js",
           "webpack.dev.js",
           "webpack.prod.js"
