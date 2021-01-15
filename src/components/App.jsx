@@ -5,23 +5,36 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './segments/NavigationBar';
 import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <NavigationBar />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Home
+              inspectionAPI={props.inspectionAPI}
+            />
+          )}
+        />
         <Route exact path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
 }
+
+App.propTypes = {
+  inspectionAPI: PropTypes.string.isRequired,
+};
 
 export default App;

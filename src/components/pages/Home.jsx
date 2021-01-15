@@ -5,14 +5,22 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
+import WIDSSensors from '../segments/WIDSSensors';
 
-function Home() {
+function Home({ inspectionAPI }) {
   return (
     <Container>
-      <h1>Home Page</h1>
+      <WIDSSensors
+        url={`${inspectionAPI}/wids-sensors`}
+      />
     </Container>
   );
 }
+
+Home.propTypes = {
+  inspectionAPI: PropTypes.string.isRequired,
+};
 
 export default Home;
