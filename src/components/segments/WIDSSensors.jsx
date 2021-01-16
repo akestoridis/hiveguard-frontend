@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import {
   ArrowClockwise,
   PlusCircleFill,
@@ -28,14 +29,28 @@ const actionEntryStyle = {
   width: '2px',
 };
 
-function WIDSSensors(props) {
+const labelStyle = {
+  display: 'inline-block',
+  width: '256px',
+};
+
+function WIDSSensors({ dataURL, regURL }) {
   const [fetchState, setFetchState] = useState('Fetching data...');
   const [dataState, setDataState] = useState([]);
   const [tableRowsState, setTableRowsState] = useState([]);
+  const [regModalState, setRegModalState] = useState(false);
+  const [regIDState, setRegIDState] = useState('');
+  const [regAPIState, setRegAPIState] = useState('');
+
+  const closeRegModal = () => {
+    setRegModalState(false);
+    setRegIDState('');
+    setRegAPIState('');
+  };
 
   const fetchData = async () => {
     try {
-      const response = await fetch(props.url);
+      const response = await fetch(dataURL);
       if (
         response.ok
         && response.headers.get('content-type').includes('application/json')
@@ -52,6 +67,45 @@ function WIDSSensors(props) {
         `Failed to fetch data at ${new Date().toLocaleTimeString()}`,
       );
     }
+  };
+
+  const registerWIDSSensor = async (payload) => {
+    try {
+      const response = await fetch(
+        regURL,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+      if (response.ok) {
+        alert(
+          'Successful WIDS Sensor Registration: '
+          + `${response.status} ${response.statusText}`,
+        );
+      } else {
+        alert(
+          'Unsuccessful WIDS Sensor Registration: '
+          + `${response.status} ${response.statusText}`,
+        );
+      }
+    } catch (err) {
+      alert('Failed to process the WIDS Sensor Registration request');
+    } finally {
+      fetchData();
+    }
+  };
+
+  const handleRegSubmission = (event) => {
+    registerWIDSSensor({
+      wids_sensor_id: regIDState,
+      wids_sensor_api: regAPIState,
+    });
+    closeRegModal();
+    event.preventDefault();
   };
 
   useEffect(() => {
@@ -124,7 +178,10 @@ function WIDSSensors(props) {
                   <td style={dataEntryStyle} />
                   <td style={dataEntryStyle} />
                   <td style={actionEntryStyle}>
-                    <Button variant="primary">
+                    <Button
+                      variant="primary"
+                      onClick={() => setRegModalState(true)}
+                    >
                       <PlusCircleFill />
                     </Button>
                   </td>
@@ -134,12 +191,57 @@ function WIDSSensors(props) {
           </div>
         </Col>
       </Row>
+      <Modal
+        show={regModalState}
+        onHide={closeRegModal}
+        backdrop="static"
+        animation={false}
+        aria-labelledby="registration-modal-title"
+      >
+        <form onSubmit={handleRegSubmission}>
+          <Modal.Header closeButton>
+            <Modal.Title id="registration-modal-title">
+              WIDS Sensor Registration
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>
+              <label htmlFor="wids_sensor_id" style={labelStyle}>
+                WIDS Sensor ID:
+                <input
+                  id="wids_sensor_id"
+                  type="text"
+                  required
+                  value={regIDState}
+                  onChange={(event) => setRegIDState(event.target.value)}
+                />
+              </label>
+            </p>
+            <p>
+              <label htmlFor="wids_sensor_api" style={labelStyle}>
+                WIDS Sensor API:
+                <input
+                  id="wids_sensor_api"
+                  type="url"
+                  required
+                  value={regAPIState}
+                  onChange={(event) => setRegAPIState(event.target.value)}
+                />
+              </label>
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" type="submit">Submit</Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
     </Container>
   );
 }
 
 WIDSSensors.propTypes = {
-  url: PropTypes.string.isRequired,
+  dataURL: PropTypes.string.isRequired,
+  regURL: PropTypes.string.isRequired,
 };
 
 export default WIDSSensors;

@@ -12,7 +12,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import WIDSSensors from '../segments/WIDSSensors';
 
-function Home({ inspectionAPI }) {
+function Home({ inspectionAPI, aggregationAPI }) {
   return (
     <Container fluid>
       <Jumbotron align="center">
@@ -23,7 +23,8 @@ function Home({ inspectionAPI }) {
         <Col />
         <Col>
           <WIDSSensors
-            url={`${inspectionAPI}/wids-sensors`}
+            dataURL={`${inspectionAPI}/wids-sensors`}
+            regURL={`${aggregationAPI}/registration`}
           />
         </Col>
       </Row>
@@ -33,6 +34,7 @@ function Home({ inspectionAPI }) {
 
 Home.propTypes = {
   inspectionAPI: PropTypes.string.isRequired,
+  aggregationAPI: PropTypes.string.isRequired,
 };
 
 export default Home;

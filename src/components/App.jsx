@@ -23,6 +23,7 @@ function App(props) {
           render={() => (
             <Home
               inspectionAPI={props.inspectionAPI}
+              aggregationAPI={props.aggregationAPI}
             />
           )}
         />
@@ -35,6 +36,7 @@ function App(props) {
 
 App.propTypes = {
   inspectionAPI: PropTypes.string.isRequired,
+  aggregationAPI: PropTypes.string.isRequired,
 };
 
 export default App;

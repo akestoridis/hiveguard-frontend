@@ -15,6 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App
       inspectionAPI={rootElement.getAttribute('inspection-api')}
+      aggregationAPI={rootElement.getAttribute('aggregation-api')}
     />
   </React.StrictMode>,
   rootElement,
