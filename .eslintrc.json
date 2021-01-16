@@ -28,6 +28,7 @@
           "webpack.prod.js"
         ]
       }
-    ]
+    ],
+    "no-alert": "off"
   }
 }
