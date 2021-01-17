@@ -24,7 +24,7 @@ function Home({ inspectionAPI, aggregationAPI }) {
         <Col>
           <WIDSSensors
             dataURL={`${inspectionAPI}/wids-sensors`}
-            regURL={`${aggregationAPI}/registry`}
+            registryURL={`${aggregationAPI}/registry`}
           />
         </Col>
       </Row>

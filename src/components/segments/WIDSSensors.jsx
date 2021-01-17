@@ -34,18 +34,25 @@ const labelStyle = {
   width: '256px',
 };
 
-function WIDSSensors({ dataURL, regURL }) {
+function WIDSSensors({ dataURL, registryURL }) {
   const [fetchState, setFetchState] = useState('Fetching data...');
   const [dataState, setDataState] = useState([]);
   const [tableRowsState, setTableRowsState] = useState([]);
   const [regModalState, setRegModalState] = useState(false);
   const [regIDState, setRegIDState] = useState('');
   const [regAPIState, setRegAPIState] = useState('');
+  const [deregModalState, setDeregModalState] = useState(false);
+  const [deregIDState, setDeregIDState] = useState('');
 
   const closeRegModal = () => {
     setRegModalState(false);
     setRegIDState('');
     setRegAPIState('');
+  };
+
+  const closeDeregModal = () => {
+    setDeregModalState(false);
+    setDeregIDState('');
   };
 
   const fetchData = async () => {
@@ -72,7 +79,7 @@ function WIDSSensors({ dataURL, regURL }) {
   const registerWIDSSensor = async (payload) => {
     try {
       const response = await fetch(
-        regURL,
+        registryURL,
         {
           method: 'POST',
           headers: {
@@ -99,6 +106,32 @@ function WIDSSensors({ dataURL, regURL }) {
     }
   };
 
+  const deregisterWIDSSensor = async (id) => {
+    try {
+      const response = await fetch(
+        `${registryURL}/${id}`,
+        {
+          method: 'DELETE',
+        },
+      );
+      if (response.ok) {
+        alert(
+          'Successful WIDS Sensor Deregistration: '
+          + `${response.status} ${response.statusText}`,
+        );
+      } else {
+        alert(
+          'Unsuccessful WIDS Sensor Deregistration: '
+          + `${response.status} ${response.statusText}`,
+        );
+      }
+    } catch (err) {
+      alert('Failed to process the WIDS Sensor Deregistration request');
+    } finally {
+      fetchData();
+    }
+  };
+
   const handleRegSubmission = (event) => {
     registerWIDSSensor({
       wids_sensor_id: regIDState,
@@ -106,6 +139,16 @@ function WIDSSensors({ dataURL, regURL }) {
     });
     closeRegModal();
     event.preventDefault();
+  };
+
+  const confirmDeregRequest = (row) => {
+    setDeregIDState(row.wids_sensor_id);
+    setDeregModalState(true);
+  };
+
+  const handleDeregRequest = () => {
+    deregisterWIDSSensor(deregIDState);
+    closeDeregModal();
   };
 
   useEffect(() => {
@@ -124,7 +167,7 @@ function WIDSSensors({ dataURL, regURL }) {
             {row.wids_sensor_api}
           </td>
           <td style={actionEntryStyle}>
-            <Button variant="danger">
+            <Button variant="danger" onClick={() => confirmDeregRequest(row)}>
               <XCircleFill />
             </Button>
           </td>
@@ -235,13 +278,36 @@ function WIDSSensors({ dataURL, regURL }) {
           </Modal.Footer>
         </form>
       </Modal>
+      <Modal
+        show={deregModalState}
+        onHide={closeDeregModal}
+        backdrop="static"
+        animation={false}
+        aria-labelledby="deregistration-modal-title"
+      >
+        <Modal.Header>
+          <Modal.Title id="deregistration-modal-title">
+            WIDS Sensor Deregistration
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            The WIDS sensor with ID "{deregIDState}" is about to be
+            deregistered. Are you sure that you want to proceed?
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeDeregModal}>No</Button>
+          <Button variant="danger" onClick={handleDeregRequest}>Yes</Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }
 
 WIDSSensors.propTypes = {
   dataURL: PropTypes.string.isRequired,
-  regURL: PropTypes.string.isRequired,
+  registryURL: PropTypes.string.isRequired,
 };
 
 export default WIDSSensors;
