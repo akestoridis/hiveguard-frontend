@@ -90,17 +90,17 @@ function WIDSSensors({ dataURL, registryURL }) {
       );
       if (response.ok) {
         alert(
-          'Successful WIDS Sensor Registration: '
+          'Successful WIDS sensor registration: '
           + `${response.status} ${response.statusText}`,
         );
       } else {
         alert(
-          'Unsuccessful WIDS Sensor Registration: '
+          'Unsuccessful WIDS sensor registration: '
           + `${response.status} ${response.statusText}`,
         );
       }
     } catch (err) {
-      alert('Failed to process the WIDS Sensor Registration request');
+      alert('Failed to process the WIDS sensor registration request');
     } finally {
       fetchData();
     }
@@ -116,17 +116,17 @@ function WIDSSensors({ dataURL, registryURL }) {
       );
       if (response.ok) {
         alert(
-          'Successful WIDS Sensor Deregistration: '
+          'Successful WIDS sensor deregistration: '
           + `${response.status} ${response.statusText}`,
         );
       } else {
         alert(
-          'Unsuccessful WIDS Sensor Deregistration: '
+          'Unsuccessful WIDS sensor deregistration: '
           + `${response.status} ${response.statusText}`,
         );
       }
     } catch (err) {
-      alert('Failed to process the WIDS Sensor Deregistration request');
+      alert('Failed to process the WIDS sensor deregistration request');
     } finally {
       fetchData();
     }
@@ -292,8 +292,13 @@ function WIDSSensors({ dataURL, registryURL }) {
         </Modal.Header>
         <Modal.Body>
           <p>
-            The WIDS sensor with ID "{deregIDState}" is about to be
-            deregistered. Are you sure that you want to proceed?
+            Are you sure that you want to deregister the WIDS sensor
+            with the following ID?
+          </p>
+          <p style={{ textAlign: 'center' }}>
+            <b style={{ fontSize: 'x-large' }}>
+              {deregIDState}
+            </b>
           </p>
         </Modal.Body>
         <Modal.Footer>
