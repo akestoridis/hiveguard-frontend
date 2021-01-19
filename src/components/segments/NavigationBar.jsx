@@ -29,6 +29,9 @@ function NavigationBar() {
       <Navbar.Toggle aria-controls="collapsible-nav" />
       <Navbar.Collapse id="collapsible-nav">
         <Nav className="ml-auto" activeKey="">
+          <LinkContainer exact to="/utilization">
+            <Nav.Link>Utilization</Nav.Link>
+          </LinkContainer>
           <LinkContainer exact to="/about">
             <Nav.Link>About</Nav.Link>
           </LinkContainer>

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './segments/NavigationBar';
 import Home from './pages/Home';
+import Utilization from './pages/Utilization';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 
@@ -24,6 +25,15 @@ function App(props) {
             <Home
               inspectionAPI={props.inspectionAPI}
               aggregationAPI={props.aggregationAPI}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/utilization"
+          render={() => (
+            <Utilization
+              inspectionAPI={props.inspectionAPI}
             />
           )}
         />
