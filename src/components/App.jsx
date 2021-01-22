@@ -10,6 +10,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './segments/NavigationBar';
 import Home from './pages/Home';
 import Utilization from './pages/Utilization';
+import Archive from './pages/Archive';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 
@@ -37,6 +38,15 @@ function App(props) {
             />
           )}
         />
+        <Route
+          exact
+          path="/archive"
+          render={() => (
+            <Archive
+              retentionAPI={props.retentionAPI}
+            />
+          )}
+        />
         <Route exact path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>
@@ -47,6 +57,7 @@ function App(props) {
 App.propTypes = {
   inspectionAPI: PropTypes.string.isRequired,
   aggregationAPI: PropTypes.string.isRequired,
+  retentionAPI: PropTypes.string.isRequired,
 };
 
 export default App;

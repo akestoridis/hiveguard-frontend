@@ -32,6 +32,9 @@ function NavigationBar() {
           <LinkContainer exact to="/utilization">
             <Nav.Link>Utilization</Nav.Link>
           </LinkContainer>
+          <LinkContainer exact to="/archive">
+            <Nav.Link>Archive</Nav.Link>
+          </LinkContainer>
           <LinkContainer exact to="/about">
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
