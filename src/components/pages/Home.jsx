@@ -11,6 +11,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import WIDSSensors from '../segments/WIDSSensors';
+import NearbyNetworks from '../segments/NearbyNetworks';
 
 function Home({ inspectionAPI, aggregationAPI }) {
   return (
@@ -19,12 +20,15 @@ function Home({ inspectionAPI, aggregationAPI }) {
         <h1>Home Page</h1>
       </Jumbotron>
       <Row>
-        <Col />
-        <Col />
         <Col>
           <WIDSSensors
             dataURL={`${inspectionAPI}/wids-sensors`}
             registryURL={`${aggregationAPI}/registry`}
+          />
+        </Col>
+        <Col>
+          <NearbyNetworks
+            dataURL={`${inspectionAPI}/nearby-networks`}
           />
         </Col>
       </Row>
