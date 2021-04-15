@@ -17,13 +17,15 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const svgToMiniDataURI = require('mini-svg-data-uri');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const SRC_DIR = path.join(__dirname, 'src');
+const DIST_DIR = path.join(__dirname, 'dist');
 
 module.exports = {
   entry: path.join(SRC_DIR, 'index.jsx'),
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: DIST_DIR,
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -78,6 +80,21 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true,
       },
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(
+            __dirname,
+            'node_modules',
+            '@hpcc-js',
+            'wasm',
+            'dist',
+            'graphvizlib.wasm',
+          ),
+          to: DIST_DIR,
+        },
+      ],
     }),
   ],
 };
