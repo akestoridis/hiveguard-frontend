@@ -14,9 +14,9 @@ import LineChart from '../segments/LineChart';
 
 function Utilization({ inspectionAPI }) {
   const [widsSensorsState, setWIDSSensorsState] = useState([]);
-  const [widsSensorIDOptions, setWIDSSensorOptions] = useState([]);
-  const [selectIDState, setSelectIDState] = useState('');
-  const [selectIntervalState, setSelectIntervalState] = useState('1');
+  const [widsSensorIDOptions, setWIDSSensorIDOptions] = useState([]);
+  const [selIDState, setSelIDState] = useState('');
+  const [selIntvlState, setSelIntvlState] = useState('1');
   const [cpuURLState, setCPUURLState] = useState(null);
   const [memoryURLState, setMemoryURLState] = useState(null);
   const [diskURLState, setDiskURLState] = useState(null);
@@ -43,10 +43,10 @@ function Utilization({ inspectionAPI }) {
 
   useEffect(() => {
     if (widsSensorsState.length === 0) {
-      setWIDSSensorOptions([]);
-      setSelectIDState('');
+      setWIDSSensorIDOptions([]);
+      setSelIDState('');
     } else {
-      setWIDSSensorOptions(Array.from(
+      setWIDSSensorIDOptions(Array.from(
         widsSensorsState,
         (row) => (
           <option key={row.wids_sensor_id} value={row.wids_sensor_id}>
@@ -54,30 +54,30 @@ function Utilization({ inspectionAPI }) {
           </option>
         ),
       ));
-      setSelectIDState(widsSensorsState[0].wids_sensor_id);
+      setSelIDState(widsSensorsState[0].wids_sensor_id);
     }
   }, [widsSensorsState]);
 
   useEffect(() => {
-    if (inspectionAPI && selectIDState && selectIntervalState) {
+    if (inspectionAPI && selIDState && selIntvlState) {
       setCPUURLState(
-        `${inspectionAPI}/wids-sensors/${selectIDState}/cpu`
-        + `?hours=${selectIntervalState}`,
+        `${inspectionAPI}/wids-sensors/${selIDState}/cpu`
+        + `?hours=${selIntvlState}`,
       );
       setMemoryURLState(
-        `${inspectionAPI}/wids-sensors/${selectIDState}/memory`
-        + `?hours=${selectIntervalState}`,
+        `${inspectionAPI}/wids-sensors/${selIDState}/memory`
+        + `?hours=${selIntvlState}`,
       );
       setDiskURLState(
-        `${inspectionAPI}/wids-sensors/${selectIDState}/disk`
-        + `?hours=${selectIntervalState}`,
+        `${inspectionAPI}/wids-sensors/${selIDState}/disk`
+        + `?hours=${selIntvlState}`,
       );
     } else {
       setCPUURLState(null);
       setMemoryURLState(null);
       setDiskURLState(null);
     }
-  }, [selectIDState, selectIntervalState]);
+  }, [selIDState, selIntvlState]);
 
   return (
     <Container fluid>
@@ -98,8 +98,8 @@ function Utilization({ inspectionAPI }) {
                 {' '}
                 <select
                   id="wids_sensor_id_options"
-                  value={selectIDState}
-                  onChange={(event) => setSelectIDState(event.target.value)}
+                  value={selIDState}
+                  onChange={(event) => setSelIDState(event.target.value)}
                 >
                   {widsSensorIDOptions}
                 </select>
@@ -113,8 +113,8 @@ function Utilization({ inspectionAPI }) {
                 {' '}
                 <select
                   id="time_interval_options"
-                  value={selectIntervalState}
-                  onChange={(event) => setSelectIntervalState(event.target.value)}
+                  value={selIntvlState}
+                  onChange={(event) => setSelIntvlState(event.target.value)}
                 >
                   <option value="1">1 hour</option>
                   <option value="2">2 hours</option>

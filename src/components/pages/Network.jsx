@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col';
 import Topology from '../segments/Topology';
 
 function Network({ inspectionAPI }) {
-  const [panIdentifiersState, setPANIdentifiers] = useState([]);
+  const [panIdentifiersState, setPANIdentifiersState] = useState([]);
   const [panIDOptions, setPANIDOptions] = useState([]);
   const [selIDState, setSelIDState] = useState('');
   const [selIntvlState, setSelIntvlState] = useState('1');
@@ -26,12 +26,12 @@ function Network({ inspectionAPI }) {
         response.ok
         && response.headers.get('content-type').includes('application/json')
       ) {
-        setPANIdentifiers(await response.json());
+        setPANIdentifiersState(await response.json());
       } else {
-        setPANIdentifiers([]);
+        setPANIdentifiersState([]);
       }
     } catch (err) {
-      setPANIdentifiers([]);
+      setPANIdentifiersState([]);
     }
   };
 
