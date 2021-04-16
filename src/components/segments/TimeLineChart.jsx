@@ -1,6 +1,6 @@
 /*!
  * Copyright 2021 Dimitrios-Georgios Akestoridis
- * hiveguard-frontend/src/components/segments/LineChart.jsx
+ * hiveguard-frontend/src/components/segments/TimeLineChart.jsx
  * @license Apache-2.0
  */
 
@@ -13,16 +13,16 @@ import Button from 'react-bootstrap/Button';
 import { ArrowClockwise } from 'react-bootstrap-icons';
 import Chart from 'chart.js';
 
-function LineChart({
+function TimeLineChart({
   dataURL,
-  yLabel,
+  dataLabel,
   lineColor,
   areaColor,
 }) {
   const canvasRef = useRef(null);
   const timeoutRef = useRef(null);
   const [fetchState, setFetchState] = useState('Fetching data...');
-  const [dataState, setDataState] = useState({ xData: [], yData: [] });
+  const [dataState, setDataState] = useState([]);
 
   const fetchData = async () => {
     if (!dataURL) {
@@ -75,13 +75,9 @@ function LineChart({
     const myChart = new Chart(canvasRef.current, {
       type: 'line',
       data: {
-        labels: Array.from(
-          dataState.xData,
-          (x) => new Date(x).toLocaleTimeString(),
-        ),
         datasets: [{
-          data: dataState.yData,
-          label: yLabel,
+          data: dataState,
+          label: dataLabel,
           borderColor: lineColor,
           backgroundColor: areaColor,
         }],
@@ -100,6 +96,7 @@ function LineChart({
         },
         scales: {
           xAxes: [{
+            type: 'time',
             ticks: {
               maxTicksLimit: 20,
             },
@@ -122,10 +119,10 @@ function LineChart({
   return (
     <Container fluid>
       <Row noGutters className="align-items-end">
-        <Col>
+        <Col xs={8}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
-              {yLabel}
+              {dataLabel}
             </b>
           </p>
         </Col>
@@ -148,15 +145,15 @@ function LineChart({
   );
 }
 
-LineChart.propTypes = {
+TimeLineChart.propTypes = {
   dataURL: PropTypes.string,
-  yLabel: PropTypes.string.isRequired,
+  dataLabel: PropTypes.string.isRequired,
   lineColor: PropTypes.string.isRequired,
   areaColor: PropTypes.string.isRequired,
 };
 
-LineChart.defaultProps = {
+TimeLineChart.defaultProps = {
   dataURL: null,
 };
 
-export default LineChart;
+export default TimeLineChart;

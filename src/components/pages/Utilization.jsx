@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import LineChart from '../segments/LineChart';
+import TimeLineChart from '../segments/TimeLineChart';
 
 function Utilization({ inspectionAPI }) {
   const [widsSensorsState, setWIDSSensorsState] = useState([]);
@@ -134,25 +134,25 @@ function Utilization({ inspectionAPI }) {
       </Jumbotron>
       <Row>
         <Col>
-          <LineChart
+          <TimeLineChart
             dataURL={cpuURLState}
-            yLabel="CPU usage (%)"
+            dataLabel="CPU usage (%) over time"
             lineColor="rgba(0, 0, 128, 1.0)"
             areaColor="rgba(0, 0, 128, 0.25)"
           />
         </Col>
         <Col>
-          <LineChart
+          <TimeLineChart
             dataURL={memoryURLState}
-            yLabel="Memory usage (%)"
+            dataLabel="Memory usage (%) over time"
             lineColor="rgba(0, 128, 0, 1.0)"
             areaColor="rgba(0, 128, 0, 0.25)"
           />
         </Col>
         <Col>
-          <LineChart
+          <TimeLineChart
             dataURL={diskURLState}
-            yLabel="Disk usage (%)"
+            dataLabel="Disk usage (%) over time"
             lineColor="rgba(128, 0, 0, 1.0)"
             areaColor="rgba(128, 0, 0, 0.25)"
           />
