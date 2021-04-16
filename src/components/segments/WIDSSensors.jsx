@@ -179,7 +179,7 @@ function WIDSSensors({ dataURL, registryURL }) {
   return (
     <Container fluid>
       <Row noGutters className="align-items-end">
-        <Col>
+        <Col xs={8}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
               Registered WIDS Sensors

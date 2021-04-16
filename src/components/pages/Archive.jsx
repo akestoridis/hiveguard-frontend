@@ -64,7 +64,7 @@ function Archive({ retentionAPI }) {
   }, [selectFolderState]);
 
   return (
-    <Container>
+    <Container fluid>
       <Jumbotron align="center">
         <h1>Archive Page</h1>
         <br />

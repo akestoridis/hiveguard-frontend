@@ -62,7 +62,7 @@ function About() {
   }
 
   return (
-    <Container>
+    <Container fluid>
       <Jumbotron align="center">
         <h1>About HiveGuard</h1>
         <p>
@@ -70,54 +70,56 @@ function About() {
           Zigbee networks.
         </p>
       </Jumbotron>
-      <h2>
-        {`${metadata.frontendName} v${metadata.frontendVersion}`}
-      </h2>
-      <p>
-        Copyright 2021 Dimitrios-Georgios Akestoridis
-      </p>
-      <p>
-        {'License: '}
-        <HashLink to={`#${metadata.frontendName}`}>
-          {metadata.frontendLicense}
-        </HashLink>
+      <Container>
+        <h2>
+          {`${metadata.frontendName} v${metadata.frontendVersion}`}
+        </h2>
+        <p>
+          Copyright 2021 Dimitrios-Georgios Akestoridis
+        </p>
+        <p>
+          {'License: '}
+          <HashLink to={`#${metadata.frontendName}`}>
+            {metadata.frontendLicense}
+          </HashLink>
+          <br />
+          {'Repository: '}
+          <a
+            href={metadata.frontendRepository}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {metadata.frontendRepository}
+          </a>
+        </p>
         <br />
-        {'Repository: '}
-        <a
-          href={metadata.frontendRepository}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {metadata.frontendRepository}
-        </a>
-      </p>
-      <br />
-      <h4>Summary of frontend production dependencies</h4>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Package Name and Version</th>
-            <th>Package License</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableRows}
-        </tbody>
-      </Table>
-      <br />
-      <h4 id={metadata.frontendName}>
-        {`License of ${metadata.frontendName} v${metadata.frontendVersion}`}
-      </h4>
-      <Card key="frontendLicense">
-        <Card.Body>
-          <Card.Text style={licenseTextStyle}>
-            {metadata.frontendLicenseText}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-      <br />
-      <h4>Licenses of frontend production dependencies</h4>
-      {licenseCards}
+        <h4>Summary of frontend production dependencies</h4>
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Package Name and Version</th>
+              <th>Package License</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows}
+          </tbody>
+        </Table>
+        <br />
+        <h4 id={metadata.frontendName}>
+          {`License of ${metadata.frontendName} v${metadata.frontendVersion}`}
+        </h4>
+        <Card key="frontendLicense">
+          <Card.Body>
+            <Card.Text style={licenseTextStyle}>
+              {metadata.frontendLicenseText}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <br />
+        <h4>Licenses of frontend production dependencies</h4>
+        {licenseCards}
+      </Container>
     </Container>
   );
 }

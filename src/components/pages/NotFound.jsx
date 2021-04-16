@@ -6,11 +6,14 @@
 
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 function NotFound() {
   return (
-    <Container>
-      <h1>Page Not Found</h1>
+    <Container fluid>
+      <Jumbotron align="center">
+        <h1>Page Not Found</h1>
+      </Jumbotron>
     </Container>
   );
 }

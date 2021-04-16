@@ -108,7 +108,7 @@ function DownloadFiles({ dataURL }) {
   return (
     <Container>
       <Row noGutters className="align-items-end">
-        <Col>
+        <Col xs={8}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
               Archived Files
