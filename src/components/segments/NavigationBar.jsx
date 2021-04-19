@@ -7,8 +7,13 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../hiveguard-logo.svg';
+
+const dropdownStyle = {
+  color: '#000000',
+};
 
 function NavigationBar() {
   return (
@@ -29,12 +34,18 @@ function NavigationBar() {
       <Navbar.Toggle aria-controls="collapsible-nav" />
       <Navbar.Collapse id="collapsible-nav">
         <Nav className="ml-auto" activeKey="">
-          <LinkContainer exact to="/network">
-            <Nav.Link>Network</Nav.Link>
-          </LinkContainer>
-          <LinkContainer exact to="/utilization">
-            <Nav.Link>Utilization</Nav.Link>
-          </LinkContainer>
+          <NavDropdown title="Inspection">
+            <NavDropdown.Item>
+              <LinkContainer exact to="/utilization" style={dropdownStyle}>
+                <Nav.Link>Utilization</Nav.Link>
+              </LinkContainer>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <LinkContainer exact to="/network" style={dropdownStyle}>
+                <Nav.Link>Network</Nav.Link>
+              </LinkContainer>
+            </NavDropdown.Item>
+          </NavDropdown>
           <LinkContainer exact to="/archive">
             <Nav.Link>Archive</Nav.Link>
           </LinkContainer>
