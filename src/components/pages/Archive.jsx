@@ -68,7 +68,6 @@ function Archive({ retentionAPI }) {
       <Jumbotron align="center">
         <h1>Archive Page</h1>
         <br />
-        <br />
         <label htmlFor="folder_name_options" style={{ fontSize: 'x-large' }}>
           <b>
             Folder Name:

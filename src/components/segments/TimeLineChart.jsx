@@ -18,6 +18,8 @@ function TimeLineChart({
   dataLabel,
   lineColor,
   areaColor,
+  yMin,
+  yMax,
 }) {
   const canvasRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -77,7 +79,6 @@ function TimeLineChart({
       data: {
         datasets: [{
           data: dataState,
-          label: dataLabel,
           borderColor: lineColor,
           backgroundColor: areaColor,
         }],
@@ -103,8 +104,8 @@ function TimeLineChart({
           }],
           yAxes: [{
             ticks: {
-              suggestedMin: 0,
-              suggestedMax: 100,
+              suggestedMin: yMin,
+              suggestedMax: yMax,
             },
           }],
         },
@@ -150,6 +151,8 @@ TimeLineChart.propTypes = {
   dataLabel: PropTypes.string.isRequired,
   lineColor: PropTypes.string.isRequired,
   areaColor: PropTypes.string.isRequired,
+  yMin: PropTypes.number.isRequired,
+  yMax: PropTypes.number.isRequired,
 };
 
 TimeLineChart.defaultProps = {

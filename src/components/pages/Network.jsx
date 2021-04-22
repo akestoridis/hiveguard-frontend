@@ -15,7 +15,7 @@ import Topology from '../segments/Topology';
 function Network({ inspectionAPI }) {
   const [panIdentifiersState, setPANIdentifiersState] = useState([]);
   const [panIDOptions, setPANIDOptions] = useState([]);
-  const [selIDState, setSelIDState] = useState('');
+  const [selPANState, setSelPANState] = useState('');
   const [selIntvlState, setSelIntvlState] = useState('1');
   const [topologyURLState, setTopologyURLState] = useState(null);
 
@@ -42,7 +42,7 @@ function Network({ inspectionAPI }) {
   useEffect(() => {
     if (panIdentifiersState.length === 0) {
       setPANIDOptions([]);
-      setSelIDState('');
+      setSelPANState('');
     } else {
       setPANIDOptions(Array.from(
         panIdentifiersState,
@@ -52,26 +52,25 @@ function Network({ inspectionAPI }) {
           </option>
         ),
       ));
-      setSelIDState(panIdentifiersState[0]);
+      setSelPANState(panIdentifiersState[0]);
     }
   }, [panIdentifiersState]);
 
   useEffect(() => {
-    if (inspectionAPI && selIDState && selIntvlState) {
+    if (inspectionAPI && selPANState && selIntvlState) {
       setTopologyURLState(
-        `${inspectionAPI}/topology/${selIDState}`
+        `${inspectionAPI}/topology/${selPANState}`
         + `?hours=${selIntvlState}`,
       );
     } else {
       setTopologyURLState(null);
     }
-  }, [selIDState, selIntvlState]);
+  }, [selPANState, selIntvlState]);
 
   return (
     <Container fluid>
       <Jumbotron align="center">
         <h1>Network Page</h1>
-        <br />
         <br />
         <Container>
           <Row
@@ -86,8 +85,8 @@ function Network({ inspectionAPI }) {
                 {' '}
                 <select
                   id="pan_id_options"
-                  value={selIDState}
-                  onChange={(event) => setSelIDState(event.target.value)}
+                  value={selPANState}
+                  onChange={(event) => setSelPANState(event.target.value)}
                 >
                   {panIDOptions}
                 </select>

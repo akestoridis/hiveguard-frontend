@@ -15,7 +15,7 @@ import TimeLineChart from '../segments/TimeLineChart';
 function Utilization({ inspectionAPI }) {
   const [widsSensorsState, setWIDSSensorsState] = useState([]);
   const [widsSensorIDOptions, setWIDSSensorIDOptions] = useState([]);
-  const [selIDState, setSelIDState] = useState('');
+  const [selSensorState, setSelSensorState] = useState('');
   const [selIntvlState, setSelIntvlState] = useState('1');
   const [cpuURLState, setCPUURLState] = useState(null);
   const [memoryURLState, setMemoryURLState] = useState(null);
@@ -44,7 +44,7 @@ function Utilization({ inspectionAPI }) {
   useEffect(() => {
     if (widsSensorsState.length === 0) {
       setWIDSSensorIDOptions([]);
-      setSelIDState('');
+      setSelSensorState('');
     } else {
       setWIDSSensorIDOptions(Array.from(
         widsSensorsState,
@@ -54,22 +54,22 @@ function Utilization({ inspectionAPI }) {
           </option>
         ),
       ));
-      setSelIDState(widsSensorsState[0].wids_sensor_id);
+      setSelSensorState(widsSensorsState[0].wids_sensor_id);
     }
   }, [widsSensorsState]);
 
   useEffect(() => {
-    if (inspectionAPI && selIDState && selIntvlState) {
+    if (inspectionAPI && selSensorState && selIntvlState) {
       setCPUURLState(
-        `${inspectionAPI}/wids-sensors/${selIDState}/cpu`
+        `${inspectionAPI}/wids-sensors/${selSensorState}/cpu`
         + `?hours=${selIntvlState}`,
       );
       setMemoryURLState(
-        `${inspectionAPI}/wids-sensors/${selIDState}/memory`
+        `${inspectionAPI}/wids-sensors/${selSensorState}/memory`
         + `?hours=${selIntvlState}`,
       );
       setDiskURLState(
-        `${inspectionAPI}/wids-sensors/${selIDState}/disk`
+        `${inspectionAPI}/wids-sensors/${selSensorState}/disk`
         + `?hours=${selIntvlState}`,
       );
     } else {
@@ -77,13 +77,12 @@ function Utilization({ inspectionAPI }) {
       setMemoryURLState(null);
       setDiskURLState(null);
     }
-  }, [selIDState, selIntvlState]);
+  }, [selSensorState, selIntvlState]);
 
   return (
     <Container fluid>
       <Jumbotron align="center">
         <h1>Utilization Page</h1>
-        <br />
         <br />
         <Container>
           <Row
@@ -98,8 +97,8 @@ function Utilization({ inspectionAPI }) {
                 {' '}
                 <select
                   id="wids_sensor_id_options"
-                  value={selIDState}
-                  onChange={(event) => setSelIDState(event.target.value)}
+                  value={selSensorState}
+                  onChange={(event) => setSelSensorState(event.target.value)}
                 >
                   {widsSensorIDOptions}
                 </select>
@@ -132,30 +131,39 @@ function Utilization({ inspectionAPI }) {
           </Row>
         </Container>
       </Jumbotron>
-      <Row>
+      <Row className="row-cols-1 row-cols-lg-3">
         <Col>
           <TimeLineChart
             dataURL={cpuURLState}
-            dataLabel="CPU usage (%) over time"
+            dataLabel="CPU Usage (%) over Time"
             lineColor="rgba(0, 0, 128, 1.0)"
             areaColor="rgba(0, 0, 128, 0.25)"
+            yMin={0}
+            yMax={100}
           />
+          <br />
         </Col>
         <Col>
           <TimeLineChart
             dataURL={memoryURLState}
-            dataLabel="Memory usage (%) over time"
+            dataLabel="Memory Usage (%) over Time"
             lineColor="rgba(0, 128, 0, 1.0)"
             areaColor="rgba(0, 128, 0, 0.25)"
+            yMin={0}
+            yMax={100}
           />
+          <br />
         </Col>
         <Col>
           <TimeLineChart
             dataURL={diskURLState}
-            dataLabel="Disk usage (%) over time"
+            dataLabel="Disk Usage (%) over Time"
             lineColor="rgba(128, 0, 0, 1.0)"
             areaColor="rgba(128, 0, 0, 0.25)"
+            yMin={0}
+            yMax={100}
           />
+          <br />
         </Col>
       </Row>
     </Container>
