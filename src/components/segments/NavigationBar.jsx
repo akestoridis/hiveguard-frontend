@@ -12,6 +12,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../hiveguard-logo.svg';
 
 const dropdownStyle = {
+  display: 'block',
+  width: '100%',
+  clear: 'both',
+  padding: '0.5rem 1rem',
+  whiteSpace: 'nowrap',
+  textAlign: 'inherit',
+  fontWeight: 'normal',
+  backgroundColor: '#ffffff',
   color: '#000000',
 };
 
@@ -35,26 +43,18 @@ function NavigationBar() {
       <Navbar.Collapse id="collapsible-nav">
         <Nav className="ml-auto" activeKey="">
           <NavDropdown title="Inspection">
-            <NavDropdown.Item>
-              <LinkContainer exact to="/utilization" style={dropdownStyle}>
-                <Nav.Link>Utilization</Nav.Link>
-              </LinkContainer>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <LinkContainer exact to="/network" style={dropdownStyle}>
-                <Nav.Link>Network</Nav.Link>
-              </LinkContainer>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <LinkContainer exact to="/packet-counters" style={dropdownStyle}>
-                <Nav.Link>Packet Counters</Nav.Link>
-              </LinkContainer>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <LinkContainer exact to="/byte-counters" style={dropdownStyle}>
-                <Nav.Link>Byte Counters</Nav.Link>
-              </LinkContainer>
-            </NavDropdown.Item>
+            <LinkContainer exact to="/utilization" style={dropdownStyle}>
+              <Nav.Link>Utilization</Nav.Link>
+            </LinkContainer>
+            <LinkContainer exact to="/network" style={dropdownStyle}>
+              <Nav.Link>Network</Nav.Link>
+            </LinkContainer>
+            <LinkContainer exact to="/packet-counters" style={dropdownStyle}>
+              <Nav.Link>Packet Counters</Nav.Link>
+            </LinkContainer>
+            <LinkContainer exact to="/byte-counters" style={dropdownStyle}>
+              <Nav.Link>Byte Counters</Nav.Link>
+            </LinkContainer>
           </NavDropdown>
           <LinkContainer exact to="/archive">
             <Nav.Link>Archive</Nav.Link>
