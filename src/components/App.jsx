@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Utilization from './pages/Utilization';
 import Network from './pages/Network';
 import PacketCounters from './pages/PacketCounters';
+import ByteCounters from './pages/ByteCounters';
 import Archive from './pages/Archive';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
@@ -54,6 +55,15 @@ function App(props) {
           path="/packet-counters"
           render={() => (
             <PacketCounters
+              inspectionAPI={props.inspectionAPI}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/byte-counters"
+          render={() => (
+            <ByteCounters
               inspectionAPI={props.inspectionAPI}
             />
           )}

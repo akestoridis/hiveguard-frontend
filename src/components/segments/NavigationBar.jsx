@@ -50,6 +50,11 @@ function NavigationBar() {
                 <Nav.Link>Packet Counters</Nav.Link>
               </LinkContainer>
             </NavDropdown.Item>
+            <NavDropdown.Item>
+              <LinkContainer exact to="/byte-counters" style={dropdownStyle}>
+                <Nav.Link>Byte Counters</Nav.Link>
+              </LinkContainer>
+            </NavDropdown.Item>
           </NavDropdown>
           <LinkContainer exact to="/archive">
             <Nav.Link>Archive</Nav.Link>
