@@ -45,6 +45,11 @@ function NavigationBar() {
                 <Nav.Link>Network</Nav.Link>
               </LinkContainer>
             </NavDropdown.Item>
+            <NavDropdown.Item>
+              <LinkContainer exact to="/packet-counters" style={dropdownStyle}>
+                <Nav.Link>Packet Counters</Nav.Link>
+              </LinkContainer>
+            </NavDropdown.Item>
           </NavDropdown>
           <LinkContainer exact to="/archive">
             <Nav.Link>Archive</Nav.Link>

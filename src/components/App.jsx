@@ -9,8 +9,9 @@ import PropTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './segments/NavigationBar';
 import Home from './pages/Home';
-import Network from './pages/Network';
 import Utilization from './pages/Utilization';
+import Network from './pages/Network';
+import PacketCounters from './pages/PacketCounters';
 import Archive from './pages/Archive';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
@@ -32,6 +33,15 @@ function App(props) {
         />
         <Route
           exact
+          path="/utilization"
+          render={() => (
+            <Utilization
+              inspectionAPI={props.inspectionAPI}
+            />
+          )}
+        />
+        <Route
+          exact
           path="/network"
           render={() => (
             <Network
@@ -41,9 +51,9 @@ function App(props) {
         />
         <Route
           exact
-          path="/utilization"
+          path="/packet-counters"
           render={() => (
-            <Utilization
+            <PacketCounters
               inspectionAPI={props.inspectionAPI}
             />
           )}
