@@ -58,6 +58,13 @@ function NavigationBar() {
             <LinkContainer exact to="/header-fields" style={dropdownStyle}>
               <Nav.Link>Header Fields</Nav.Link>
             </LinkContainer>
+            <LinkContainer
+              exact
+              to="/battery-percentages"
+              style={dropdownStyle}
+            >
+              <Nav.Link>Battery Percentages</Nav.Link>
+            </LinkContainer>
           </NavDropdown>
           <LinkContainer exact to="/archive">
             <Nav.Link>Archive</Nav.Link>

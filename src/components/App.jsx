@@ -14,6 +14,7 @@ import Network from './pages/Network';
 import PacketCounters from './pages/PacketCounters';
 import ByteCounters from './pages/ByteCounters';
 import HeaderFields from './pages/HeaderFields';
+import BatteryPercentages from './pages/BatteryPercentages';
 import Archive from './pages/Archive';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
@@ -74,6 +75,15 @@ function App(props) {
           path="/header-fields"
           render={() => (
             <HeaderFields
+              inspectionAPI={props.inspectionAPI}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/battery-percentages"
+          render={() => (
+            <BatteryPercentages
               inspectionAPI={props.inspectionAPI}
             />
           )}
