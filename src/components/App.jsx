@@ -13,6 +13,7 @@ import Utilization from './pages/Utilization';
 import Network from './pages/Network';
 import PacketCounters from './pages/PacketCounters';
 import ByteCounters from './pages/ByteCounters';
+import HeaderFields from './pages/HeaderFields';
 import Archive from './pages/Archive';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
@@ -64,6 +65,15 @@ function App(props) {
           path="/byte-counters"
           render={() => (
             <ByteCounters
+              inspectionAPI={props.inspectionAPI}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/header-fields"
+          render={() => (
+            <HeaderFields
               inspectionAPI={props.inspectionAPI}
             />
           )}

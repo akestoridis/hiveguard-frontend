@@ -55,6 +55,9 @@ function NavigationBar() {
             <LinkContainer exact to="/byte-counters" style={dropdownStyle}>
               <Nav.Link>Byte Counters</Nav.Link>
             </LinkContainer>
+            <LinkContainer exact to="/header-fields" style={dropdownStyle}>
+              <Nav.Link>Header Fields</Nav.Link>
+            </LinkContainer>
           </NavDropdown>
           <LinkContainer exact to="/archive">
             <Nav.Link>Archive</Nav.Link>
