@@ -1,6 +1,6 @@
 /*!
  * Copyright 2021 Dimitrios-Georgios Akestoridis
- * hiveguard-frontend/src/components/pages/Network.jsx
+ * hiveguard-frontend/src/components/pages/Topology.jsx
  * @license Apache-2.0
  */
 
@@ -10,14 +10,14 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Topology from '../segments/Topology';
+import DiscoveredDevices from '../segments/DiscoveredDevices';
 
-function Network({ inspectionAPI }) {
+function Topology({ inspectionAPI }) {
   const [panIdentifiersState, setPANIdentifiersState] = useState([]);
   const [panIDOptions, setPANIDOptions] = useState([]);
   const [selPANState, setSelPANState] = useState('');
   const [selIntvlState, setSelIntvlState] = useState('1');
-  const [topologyURLState, setTopologyURLState] = useState(null);
+  const [dataURLState, setDataURLState] = useState(null);
 
   const fetchPANIdentifiers = async () => {
     try {
@@ -58,19 +58,19 @@ function Network({ inspectionAPI }) {
 
   useEffect(() => {
     if (inspectionAPI && selPANState && selIntvlState) {
-      setTopologyURLState(
+      setDataURLState(
         `${inspectionAPI}/topology/${selPANState}`
         + `?hours=${selIntvlState}`,
       );
     } else {
-      setTopologyURLState(null);
+      setDataURLState(null);
     }
   }, [selPANState, selIntvlState]);
 
   return (
     <Container fluid>
       <Jumbotron align="center">
-        <h1>Network Page</h1>
+        <h1>Topology Page</h1>
         <br />
         <Container>
           <Row
@@ -119,15 +119,15 @@ function Network({ inspectionAPI }) {
           </Row>
         </Container>
       </Jumbotron>
-      <Topology
-        dataURL={topologyURLState}
+      <DiscoveredDevices
+        dataURL={dataURLState}
       />
     </Container>
   );
 }
 
-Network.propTypes = {
+Topology.propTypes = {
   inspectionAPI: PropTypes.string.isRequired,
 };
 
-export default Network;
+export default Topology;

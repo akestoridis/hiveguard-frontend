@@ -52,10 +52,10 @@ function NavigationBar() {
             </LinkContainer>
             <LinkContainer
               exact
-              to="/network"
+              to="/topology"
               style={dropdownStyle}
             >
-              <Nav.Link>Network</Nav.Link>
+              <Nav.Link>Topology</Nav.Link>
             </LinkContainer>
             <LinkContainer
               exact

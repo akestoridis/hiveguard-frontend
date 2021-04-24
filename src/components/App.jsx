@@ -10,7 +10,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './segments/NavigationBar';
 import Home from './pages/Home';
 import Utilization from './pages/Utilization';
-import Network from './pages/Network';
+import Topology from './pages/Topology';
 import PacketCounters from './pages/PacketCounters';
 import ByteCounters from './pages/ByteCounters';
 import HeaderFields from './pages/HeaderFields';
@@ -45,9 +45,9 @@ function App(props) {
         />
         <Route
           exact
-          path="/network"
+          path="/topology"
           render={() => (
-            <Network
+            <Topology
               inspectionAPI={props.inspectionAPI}
             />
           )}

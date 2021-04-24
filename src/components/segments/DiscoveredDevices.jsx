@@ -1,6 +1,6 @@
 /*!
  * Copyright 2021 Dimitrios-Georgios Akestoridis
- * hiveguard-frontend/src/components/segments/Topology.jsx
+ * hiveguard-frontend/src/components/segments/DiscoveredDevices.jsx
  * @license Apache-2.0
  */
 
@@ -24,7 +24,7 @@ const graphStyle = {
   justifyContent: 'center',
 };
 
-function Topology({ dataURL }) {
+function DiscoveredDevices({ dataURL }) {
   const timeoutRef = useRef(null);
   const [fetchState, setFetchState] = useState('Fetching data...');
   const [dataState, setDataState] = useState([]);
@@ -162,12 +162,12 @@ function Topology({ dataURL }) {
   );
 }
 
-Topology.propTypes = {
+DiscoveredDevices.propTypes = {
   dataURL: PropTypes.string,
 };
 
-Topology.defaultProps = {
+DiscoveredDevices.defaultProps = {
   dataURL: null,
 };
 
-export default Topology;
+export default DiscoveredDevices;
