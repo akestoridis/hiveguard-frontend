@@ -106,7 +106,7 @@ function Topology({ dataURL }) {
   }, [dataState]);
 
   useEffect(() => {
-    graphviz('#topologyGraph').renderDot(graphDefState);
+    graphviz('#topologyGraph', { useWorker: false }).renderDot(graphDefState);
   }, [graphDefState]);
 
   return (

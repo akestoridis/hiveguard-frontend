@@ -277,8 +277,6 @@ function HeaderFields({ inspectionAPI }) {
           dataLabel="Header Field Value over Time"
           lineColor="rgba(0, 0, 128, 1.0)"
           areaColor="rgba(0, 0, 128, 0.25)"
-          yMin={0}
-          yMax={255}
         />
         <br />
       </Container>

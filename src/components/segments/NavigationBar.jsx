@@ -43,19 +43,39 @@ function NavigationBar() {
       <Navbar.Collapse id="collapsible-nav">
         <Nav className="ml-auto" activeKey="">
           <NavDropdown title="Inspection">
-            <LinkContainer exact to="/utilization" style={dropdownStyle}>
+            <LinkContainer
+              exact
+              to="/utilization"
+              style={dropdownStyle}
+            >
               <Nav.Link>Utilization</Nav.Link>
             </LinkContainer>
-            <LinkContainer exact to="/network" style={dropdownStyle}>
+            <LinkContainer
+              exact
+              to="/network"
+              style={dropdownStyle}
+            >
               <Nav.Link>Network</Nav.Link>
             </LinkContainer>
-            <LinkContainer exact to="/packet-counters" style={dropdownStyle}>
+            <LinkContainer
+              exact
+              to="/packet-counters"
+              style={dropdownStyle}
+            >
               <Nav.Link>Packet Counters</Nav.Link>
             </LinkContainer>
-            <LinkContainer exact to="/byte-counters" style={dropdownStyle}>
+            <LinkContainer
+              exact
+              to="/byte-counters"
+              style={dropdownStyle}
+            >
               <Nav.Link>Byte Counters</Nav.Link>
             </LinkContainer>
-            <LinkContainer exact to="/header-fields" style={dropdownStyle}>
+            <LinkContainer
+              exact
+              to="/header-fields"
+              style={dropdownStyle}
+            >
               <Nav.Link>Header Fields</Nav.Link>
             </LinkContainer>
             <LinkContainer
@@ -66,10 +86,16 @@ function NavigationBar() {
               <Nav.Link>Battery Percentages</Nav.Link>
             </LinkContainer>
           </NavDropdown>
-          <LinkContainer exact to="/archive">
+          <LinkContainer
+            exact
+            to="/archive"
+          >
             <Nav.Link>Archive</Nav.Link>
           </LinkContainer>
-          <LinkContainer exact to="/about">
+          <LinkContainer
+            exact
+            to="/about"
+          >
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
         </Nav>

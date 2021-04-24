@@ -97,8 +97,14 @@ function App(props) {
             />
           )}
         />
-        <Route exact path="/about" component={About} />
-        <Route component={NotFound} />
+        <Route
+          exact
+          path="/about"
+          component={About}
+        />
+        <Route
+          component={NotFound}
+        />
       </Switch>
     </BrowserRouter>
   );

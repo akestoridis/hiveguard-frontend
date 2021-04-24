@@ -73,6 +73,22 @@ function TimeLineChart({
   }, [dataURL]);
 
   useEffect(() => {
+    const myScales = {
+      xAxes: [{
+        type: 'time',
+        ticks: {
+          maxTicksLimit: 20,
+        },
+      }],
+    };
+    if (yMin !== null && yMax !== null) {
+      myScales.yAxes = [{
+        ticks: {
+          suggestedMin: yMin,
+          suggestedMax: yMax,
+        },
+      }];
+    }
     /* eslint-disable no-unused-vars */
     const myChart = new Chart(canvasRef.current, {
       type: 'line',
@@ -92,26 +108,13 @@ function TimeLineChart({
             tension: 0,
           },
           point: {
-            radius: 0,
+            radius: 2,
           },
-        },
-        scales: {
-          xAxes: [{
-            type: 'time',
-            ticks: {
-              maxTicksLimit: 20,
-            },
-          }],
-          yAxes: [{
-            ticks: {
-              suggestedMin: yMin,
-              suggestedMax: yMax,
-            },
-          }],
         },
         animation: {
           duration: 0,
         },
+        scales: myScales,
       },
     });
     /* eslint-enable no-unused-vars */
@@ -151,12 +154,14 @@ TimeLineChart.propTypes = {
   dataLabel: PropTypes.string.isRequired,
   lineColor: PropTypes.string.isRequired,
   areaColor: PropTypes.string.isRequired,
-  yMin: PropTypes.number.isRequired,
-  yMax: PropTypes.number.isRequired,
+  yMin: PropTypes.number,
+  yMax: PropTypes.number,
 };
 
 TimeLineChart.defaultProps = {
   dataURL: null,
+  yMin: null,
+  yMax: null,
 };
 
 export default TimeLineChart;
