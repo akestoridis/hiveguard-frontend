@@ -116,7 +116,7 @@ function TimeBarChart({
   return (
     <Container fluid>
       <Row noGutters className="align-items-end">
-        <Col xs={8}>
+        <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
               {dataLabel}

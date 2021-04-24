@@ -4,7 +4,7 @@
  * @license Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -35,6 +35,7 @@ const labelStyle = {
 };
 
 function WIDSSensors({ dataURL, registryURL }) {
+  const timeoutRef = useRef(null);
   const [fetchState, setFetchState] = useState('Fetching data...');
   const [dataState, setDataState] = useState([]);
   const [tableRowsState, setTableRowsState] = useState([]);
@@ -151,9 +152,23 @@ function WIDSSensors({ dataURL, registryURL }) {
     closeDeregModal();
   };
 
-  useEffect(() => {
+  const fetchDataPeriodically = () => {
     fetchData();
-  }, []);
+    timeoutRef.current = setTimeout(fetchDataPeriodically, 30000);
+  };
+
+  useEffect(() => {
+    if (dataURL) {
+      fetchDataPeriodically();
+    } else {
+      setFetchState(
+        `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
+      );
+    }
+    return () => {
+      clearTimeout(timeoutRef.current);
+    };
+  }, [dataURL]);
 
   useEffect(() => {
     setTableRowsState(Array.from(
@@ -179,7 +194,7 @@ function WIDSSensors({ dataURL, registryURL }) {
   return (
     <Container fluid>
       <Row noGutters className="align-items-end">
-        <Col xs={8}>
+        <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
               Registered WIDS Sensors
