@@ -103,23 +103,21 @@ function NearbyNetworks({ dataURL }) {
       </Row>
       <Row noGutters className="align-items-start">
         <Col>
-          <div style={{ overflow: 'auto', height: '400px' }}>
-            <Table striped bordered>
-              <thead>
-                <tr>
-                  <th style={dataEntryStyle}>
-                    PAN ID
-                  </th>
-                  <th style={dataEntryStyle}>
-                    Extended PAN ID
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableRowsState}
-              </tbody>
-            </Table>
-          </div>
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th style={dataEntryStyle}>
+                  PAN ID
+                </th>
+                <th style={dataEntryStyle}>
+                  Extended PAN ID
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableRowsState}
+            </tbody>
+          </Table>
         </Col>
       </Row>
     </Container>

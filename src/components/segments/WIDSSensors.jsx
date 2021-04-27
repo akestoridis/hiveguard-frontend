@@ -215,38 +215,36 @@ function WIDSSensors({ dataURL, registryURL }) {
       </Row>
       <Row noGutters className="align-items-start">
         <Col>
-          <div style={{ overflow: 'auto', height: '400px' }}>
-            <Table striped bordered>
-              <thead>
-                <tr>
-                  <th style={dataEntryStyle}>
-                    WIDS Sensor ID
-                  </th>
-                  <th style={dataEntryStyle}>
-                    WIDS Sensor API
-                  </th>
-                  <th style={actionEntryStyle}>
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableRowsState}
-                <tr>
-                  <td style={dataEntryStyle} />
-                  <td style={dataEntryStyle} />
-                  <td style={actionEntryStyle}>
-                    <Button
-                      variant="primary"
-                      onClick={() => setRegModalState(true)}
-                    >
-                      <PlusCircleFill />
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th style={dataEntryStyle}>
+                  WIDS Sensor ID
+                </th>
+                <th style={dataEntryStyle}>
+                  WIDS Sensor API
+                </th>
+                <th style={actionEntryStyle}>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableRowsState}
+              <tr>
+                <td style={dataEntryStyle} />
+                <td style={dataEntryStyle} />
+                <td style={actionEntryStyle}>
+                  <Button
+                    variant="primary"
+                    onClick={() => setRegModalState(true)}
+                  >
+                    <PlusCircleFill />
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </Col>
       </Row>
       <Modal

@@ -111,18 +111,18 @@ function UnreadAlerts({ dataURL }) {
   useEffect(() => {
     setTableRowsState(Array.from(
       dataState,
-      (unreadAlert) => (
-        <tr key={unreadAlert.alert_id}>
+      (row) => (
+        <tr key={row.alert_id}>
           <td style={dataEntryStyle}>
-            {unreadAlert.alert_id}
+            {row.alert_id}
           </td>
           <td style={dataEntryStyle}>
-            {unreadAlert.message}
+            {row.message}
           </td>
           <td style={actionEntryStyle}>
             <Button
               variant="primary"
-              onClick={() => archiveAlert(unreadAlert.alert_id)}
+              onClick={() => archiveAlert(row.alert_id)}
             >
               <Archive />
             </Button>
@@ -133,7 +133,7 @@ function UnreadAlerts({ dataURL }) {
   }, [dataState]);
 
   return (
-    <Container>
+    <Container fluid>
       <Row noGutters className="align-items-end">
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>

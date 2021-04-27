@@ -26,16 +26,19 @@ function Home({ inspectionAPI, aggregationAPI }) {
             dataURL={`${inspectionAPI}/wids-sensors`}
             registryURL={`${aggregationAPI}/registry`}
           />
+          <br />
         </Col>
         <Col>
           <UnreadAlerts
             dataURL={`${inspectionAPI}/alerts`}
           />
+          <br />
         </Col>
         <Col>
           <NearbyNetworks
             dataURL={`${inspectionAPI}/nearby-networks`}
           />
+          <br />
         </Col>
       </Row>
     </Container>
