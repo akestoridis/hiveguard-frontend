@@ -143,7 +143,9 @@ function TimeLineChart({
         </Col>
       </Row>
       <Row noGutters className="align-items-start">
-        <canvas ref={canvasRef} />
+        <Col>
+          <canvas ref={canvasRef} />
+        </Col>
       </Row>
     </Container>
   );
