@@ -8,9 +8,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ArchivedAlerts from '../segments/ArchivedAlerts';
 import DownloadFiles from '../segments/DownloadFiles';
 
-function Archive({ retentionAPI }) {
+function Archive({ inspectionAPI, retentionAPI }) {
   const [archiveFoldersState, setArchiveFoldersState] = useState([]);
   const [folderNameOptions, setFolderNameOptions] = useState([]);
   const [selectFolderState, setSelectFolderState] = useState('');
@@ -82,14 +85,24 @@ function Archive({ retentionAPI }) {
           </select>
         </label>
       </Jumbotron>
-      <DownloadFiles
-        dataURL={folderURLState}
-      />
+      <Row className="row-cols-1 row-cols-lg-2">
+        <Col>
+          <ArchivedAlerts
+            dataURL={`${inspectionAPI}/alerts`}
+          />
+        </Col>
+        <Col>
+          <DownloadFiles
+            dataURL={folderURLState}
+          />
+        </Col>
+      </Row>
     </Container>
   );
 }
 
 Archive.propTypes = {
+  inspectionAPI: PropTypes.string.isRequired,
   retentionAPI: PropTypes.string.isRequired,
 };
 

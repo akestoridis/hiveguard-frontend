@@ -93,6 +93,7 @@ function App(props) {
           path="/archive"
           render={() => (
             <Archive
+              inspectionAPI={props.inspectionAPI}
               retentionAPI={props.retentionAPI}
             />
           )}
