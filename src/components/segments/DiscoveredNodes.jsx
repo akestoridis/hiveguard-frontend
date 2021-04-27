@@ -1,6 +1,6 @@
 /*!
  * Copyright 2021 Dimitrios-Georgios Akestoridis
- * hiveguard-frontend/src/components/segments/DiscoveredDevices.jsx
+ * hiveguard-frontend/src/components/segments/DiscoveredNodes.jsx
  * @license Apache-2.0
  */
 
@@ -24,7 +24,7 @@ const graphStyle = {
   justifyContent: 'center',
 };
 
-function DiscoveredDevices({ dataURL }) {
+function DiscoveredNodes({ dataURL }) {
   const timeoutRef = useRef(null);
   const [fetchState, setFetchState] = useState('Fetching data...');
   const [dataState, setDataState] = useState([]);
@@ -115,7 +115,7 @@ function DiscoveredDevices({ dataURL }) {
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
-              Discovered Devices
+              Discovered Nodes
             </b>
           </p>
         </Col>
@@ -133,41 +133,41 @@ function DiscoveredDevices({ dataURL }) {
       </Row>
       <Row noGutters className="align-items-start">
         <Col>
-          <div style={{ overflow: 'auto', height: '400px' }}>
-            <Table striped bordered>
-              <thead>
-                <tr>
-                  <th style={dataEntryStyle}>
-                    Short Address
-                  </th>
-                  <th style={dataEntryStyle}>
-                    Extended Address
-                  </th>
-                  <th style={dataEntryStyle}>
-                    Logical Device Type
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableRowsState}
-              </tbody>
-            </Table>
-          </div>
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th style={dataEntryStyle}>
+                  Short Address
+                </th>
+                <th style={dataEntryStyle}>
+                  Extended Address
+                </th>
+                <th style={dataEntryStyle}>
+                  Logical Device Type
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableRowsState}
+            </tbody>
+          </Table>
+          <br />
         </Col>
         <Col>
           <div id="topologyGraph" style={graphStyle} />
+          <br />
         </Col>
       </Row>
     </Container>
   );
 }
 
-DiscoveredDevices.propTypes = {
+DiscoveredNodes.propTypes = {
   dataURL: PropTypes.string,
 };
 
-DiscoveredDevices.defaultProps = {
+DiscoveredNodes.defaultProps = {
   dataURL: null,
 };
 
-export default DiscoveredDevices;
+export default DiscoveredNodes;

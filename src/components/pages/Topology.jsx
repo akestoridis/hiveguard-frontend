@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import DiscoveredDevices from '../segments/DiscoveredDevices';
+import DiscoveredNodes from '../segments/DiscoveredNodes';
 
 function Topology({ inspectionAPI }) {
   const [panIdentifiersState, setPANIdentifiersState] = useState([]);
@@ -119,7 +119,7 @@ function Topology({ inspectionAPI }) {
           </Row>
         </Container>
       </Jumbotron>
-      <DiscoveredDevices
+      <DiscoveredNodes
         dataURL={dataURLState}
       />
     </Container>
