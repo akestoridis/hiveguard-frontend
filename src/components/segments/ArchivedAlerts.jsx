@@ -73,13 +73,13 @@ function ArchivedAlerts({ dataURL }) {
   useEffect(() => {
     setTableRowsState(Array.from(
       dataState,
-      (unreadAlert) => (
-        <tr key={unreadAlert.alert_id}>
+      (row) => (
+        <tr key={row.alert_id}>
           <td style={dataEntryStyle}>
-            {unreadAlert.alert_id}
+            {row.alert_id}
           </td>
           <td style={dataEntryStyle}>
-            {unreadAlert.message}
+            {row.message}
           </td>
         </tr>
       ),
@@ -87,7 +87,7 @@ function ArchivedAlerts({ dataURL }) {
   }, [dataState]);
 
   return (
-    <Container>
+    <Container fluid>
       <Row noGutters className="align-items-end">
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
