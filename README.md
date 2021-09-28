@@ -5,11 +5,36 @@
 Frontend for HiveGuard
 
 
+## Instructions
+
+Currently, you can install the HiveGuard frontend application as follows:
+```console
+$ git clone https://github.com/akestoridis/hiveguard-frontend.git
+$ cd hiveguard-frontend/
+$ npm install
+```
+
+Then, you can build the HiveGuard frontend application by executing the following command:
+```console
+$ npm run build
+```
+
+During development, you can launch a web server that serves the HiveGuard frontend application by executing the following command:
+```console
+$ npm run start:dev
+```
+
+
 ## Publication
 
 HiveGuard was used in the following publication:
 
 * D.-G. Akestoridis and P. Tague, “HiveGuard: A network security monitoring architecture for Zigbee networks,” to appear in Proc. IEEE CNS’21.
+
+
+## Acknowledgments
+
+This project was supported in part by the CyLab Security and Privacy Institute.
 
 
 ## License
