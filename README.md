@@ -25,6 +25,11 @@ $ npm run start:dev
 ```
 
 
+## Screenshot
+
+<img src="hiveguard-demo-topology-page.png">
+
+
 ## Publication
 
 HiveGuard was used in the following publication:
