@@ -1,4 +1,4 @@
-<img src="hiveguard-header.png">
+<img src="https://github.com/akestoridis/hiveguard-frontend/raw/36eb62eb417f3ee6ddd7fb740975be66a0792fa6/hiveguard-header.png">
 
 # hiveguard-frontend
 
@@ -27,7 +27,7 @@ $ npm run start:dev
 
 ## Screenshot
 
-<img src="hiveguard-demo-topology-page.png">
+<img src="https://github.com/akestoridis/hiveguard-frontend/raw/944e03998224404b823b1220888ceffd84e589d0/hiveguard-demo-topology-page.png">
 
 
 ## Publication
