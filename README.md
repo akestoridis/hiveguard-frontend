@@ -29,11 +29,11 @@ $ npm run start:dev
 
 <img src="https://github.com/akestoridis/hiveguard-frontend/raw/944e03998224404b823b1220888ceffd84e589d0/hiveguard-demo-topology-page.png">
 
-<img src="hiveguard-attack13-nwkaux-header-fields-page-rpi02-0x0000.png">
+<img src="https://github.com/akestoridis/hiveguard-frontend/raw/c4332b57b0ae46a1b59cdc5da63f74e1c1bada8e/hiveguard-attack13-nwkaux-header-fields-page-rpi02-0x0000.png">
 
-<img src="hiveguard-attack13-mac-header-fields-page-rpi02-0xe0b3.png">
+<img src="https://github.com/akestoridis/hiveguard-frontend/raw/c4332b57b0ae46a1b59cdc5da63f74e1c1bada8e/hiveguard-attack13-mac-header-fields-page-rpi02-0xe0b3.png">
 
-<img src="hiveguard-attack13-packet-counters-page-rpi02-0xe0b3.png">
+<img src="https://github.com/akestoridis/hiveguard-frontend/raw/c4332b57b0ae46a1b59cdc5da63f74e1c1bada8e/hiveguard-attack13-packet-counters-page-rpi02-0xe0b3.png">
 
 
 ## Publication
