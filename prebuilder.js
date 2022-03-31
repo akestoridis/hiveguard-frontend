@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,17 +23,22 @@ function deriveBuildIdentifier(pkgVersion) {
   let cp;
   let match;
 
-  cp = spawnSync('git', [
-    '--git-dir',
-    path.join(__dirname, '.git'),
-    'describe',
-    '--tags',
-  ]);
+  cp = spawnSync(
+    'git',
+    [
+      '--git-dir',
+      path.join(__dirname, '.git'),
+      'describe',
+      '--tags',
+    ],
+  );
   if (cp.status === 0) {
-    match = cp.stdout.toString().match(new RegExp(
-      `^v${pkgVersion.replace(/\./g, '\\.')}`
-      + '(\\-[0-9]+\\-g([0-9a-f]{7}))?\\r?\\n$',
-    ));
+    match = cp.stdout.toString().match(
+      new RegExp(
+        `^v${pkgVersion.replace(/\./g, '\\.')}`
+        + '(\\-[0-9]+\\-g([0-9a-f]{7}))?\\r?\\n$',
+      ),
+    );
     if (match) {
       if (match[2]) {
         return `+${match[2]}`;
@@ -42,13 +47,16 @@ function deriveBuildIdentifier(pkgVersion) {
     }
   }
 
-  cp = spawnSync('git', [
-    '--git-dir',
-    path.join(__dirname, '.git'),
-    'rev-parse',
-    '--short',
-    'HEAD',
-  ]);
+  cp = spawnSync(
+    'git',
+    [
+      '--git-dir',
+      path.join(__dirname, '.git'),
+      'rev-parse',
+      '--short',
+      'HEAD',
+    ],
+  );
   if (cp.status === 0) {
     match = cp.stdout.toString().match(/^([0-9a-f]{7})\r?\n$/);
     if (match) {

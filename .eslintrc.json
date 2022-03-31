@@ -19,7 +19,8 @@
   ],
   "rules": {
     "import/no-extraneous-dependencies": [
-      "error", {
+      "error",
+      {
         "devDependencies": [
           "cleaner.js",
           "prebuilder.js",
@@ -27,6 +28,20 @@
           "webpack.dev.js",
           "webpack.prod.js"
         ]
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 78,
+        "tabWidth": 2,
+        "comments": 78,
+        "ignoreComments": false,
+        "ignoreTrailingComments": false,
+        "ignoreUrls": false,
+        "ignoreStrings": false,
+        "ignoreTemplateLiterals": false,
+        "ignoreRegExpLiterals": false
       }
     ],
     "no-alert": "off"

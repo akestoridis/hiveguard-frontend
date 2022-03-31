@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/pages/About.jsx
  * @license Apache-2.0
  */
@@ -7,9 +7,9 @@
 import React from 'react';
 import { HashLink } from 'react-router-hash-link';
 import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
+
 // eslint-disable-next-line import/no-unresolved
 import metadata from '../metadata.json';
 
@@ -40,7 +40,7 @@ function About() {
       <tr key={`${key}-Row`}>
         <td>{key}</td>
         <td>
-          <HashLink to={`#${key}`}>
+          <HashLink to={`#${key}`} className="text-decoration-none">
             {pkgLicense}
           </HashLink>
         </td>
@@ -63,23 +63,26 @@ function About() {
 
   return (
     <Container fluid>
-      <Jumbotron align="center">
-        <h1>About HiveGuard</h1>
-        <p>
+      <div className="p-5 mb-4 rounded-3 bg-light text-dark text-center">
+        <h1 className="display-5 fw-bold">About HiveGuard</h1>
+        <p className="fs-5">
           HiveGuard is a distributed system for monitoring the security of
           Zigbee networks.
         </p>
-      </Jumbotron>
+      </div>
       <Container>
-        <h2>
+        <h4 className="fw-bold">
           {`${metadata.frontendName} v${metadata.frontendVersion}`}
-        </h2>
+        </h4>
         <p>
-          Copyright 2021 Dimitrios-Georgios Akestoridis
+          Copyright 2021-2022 Dimitrios-Georgios Akestoridis
         </p>
         <p>
           {'License: '}
-          <HashLink to={`#${metadata.frontendName}`}>
+          <HashLink
+            to={`#${metadata.frontendName}`}
+            className="text-decoration-none"
+          >
             {metadata.frontendLicense}
           </HashLink>
           <br />
@@ -88,12 +91,23 @@ function About() {
             href={metadata.frontendRepository}
             target="_blank"
             rel="noreferrer"
+            className="text-decoration-none"
           >
             {metadata.frontendRepository}
           </a>
         </p>
         <br />
-        <h4>Summary of frontend production dependencies</h4>
+        <h4 className="fw-bold">
+          Acknowledgments
+        </h4>
+        <p>
+          This project was supported in part by the CyLab Security and Privacy
+          Institute.
+        </p>
+        <br />
+        <h4 className="fw-bold">
+          Summary of frontend production dependencies
+        </h4>
         <Table striped bordered>
           <thead>
             <tr>
@@ -106,7 +120,7 @@ function About() {
           </tbody>
         </Table>
         <br />
-        <h4 id={metadata.frontendName}>
+        <h4 className="fw-bold" id={metadata.frontendName}>
           {`License of ${metadata.frontendName} v${metadata.frontendVersion}`}
         </h4>
         <Card key="frontendLicense">
@@ -117,7 +131,9 @@ function About() {
           </Card.Body>
         </Card>
         <br />
-        <h4>Licenses of frontend production dependencies</h4>
+        <h4 className="fw-bold">
+          Licenses of frontend production dependencies
+        </h4>
         {licenseCards}
       </Container>
     </Container>

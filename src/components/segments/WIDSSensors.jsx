@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/segments/WIDSSensors.jsx
  * @license Apache-2.0
  */
@@ -134,10 +134,12 @@ function WIDSSensors({ dataURL, registryURL }) {
   };
 
   const handleRegSubmission = (event) => {
-    registerWIDSSensor({
-      wids_sensor_id: regIDState,
-      wids_sensor_api: regAPIState,
-    });
+    registerWIDSSensor(
+      {
+        wids_sensor_id: regIDState,
+        wids_sensor_api: regAPIState,
+      },
+    );
     closeRegModal();
     event.preventDefault();
   };
@@ -157,43 +159,54 @@ function WIDSSensors({ dataURL, registryURL }) {
     timeoutRef.current = setTimeout(fetchDataPeriodically, 30000);
   };
 
-  useEffect(() => {
-    if (dataURL) {
-      fetchDataPeriodically();
-    } else {
-      setFetchState(
-        `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
-      );
-    }
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, [dataURL]);
+  useEffect(
+    () => {
+      if (dataURL) {
+        fetchDataPeriodically();
+      } else {
+        setFetchState(
+          `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
+        );
+      }
+      return () => {
+        clearTimeout(timeoutRef.current);
+      };
+    },
+    [dataURL],
+  );
 
-  useEffect(() => {
-    setTableRowsState(Array.from(
-      dataState,
-      (row) => (
-        <tr key={row.wids_sensor_id}>
-          <td style={dataEntryStyle}>
-            {row.wids_sensor_id}
-          </td>
-          <td style={dataEntryStyle}>
-            {row.wids_sensor_api}
-          </td>
-          <td style={actionEntryStyle}>
-            <Button variant="danger" onClick={() => confirmDeregRequest(row)}>
-              <XCircleFill />
-            </Button>
-          </td>
-        </tr>
-      ),
-    ));
-  }, [dataState]);
+  useEffect(
+    () => {
+      setTableRowsState(
+        Array.from(
+          dataState,
+          (row) => (
+            <tr key={row.wids_sensor_id}>
+              <td style={dataEntryStyle}>
+                {row.wids_sensor_id}
+              </td>
+              <td style={dataEntryStyle}>
+                {row.wids_sensor_api}
+              </td>
+              <td style={actionEntryStyle}>
+                <Button
+                  variant="danger"
+                  onClick={() => confirmDeregRequest(row)}
+                >
+                  <XCircleFill />
+                </Button>
+              </td>
+            </tr>
+          ),
+        ),
+      );
+    },
+    [dataState],
+  );
 
   return (
     <Container fluid>
-      <Row noGutters className="align-items-end">
+      <Row className="align-items-end">
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
@@ -213,7 +226,7 @@ function WIDSSensors({ dataURL, registryURL }) {
           </p>
         </Col>
       </Row>
-      <Row noGutters className="align-items-start">
+      <Row className="align-items-start">
         <Col>
           <Table striped bordered>
             <thead>

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/segments/ArchivedFiles.jsx
  * @license Apache-2.0
  */
@@ -83,46 +83,54 @@ function ArchivedFiles({ dataURL }) {
     timeoutRef.current = setTimeout(fetchDataPeriodically, 30000);
   };
 
-  useEffect(() => {
-    if (dataURL) {
-      fetchDataPeriodically();
-    } else {
-      setFetchState(
-        `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
-      );
-    }
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, [dataURL]);
+  useEffect(
+    () => {
+      if (dataURL) {
+        fetchDataPeriodically();
+      } else {
+        setFetchState(
+          `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
+        );
+      }
+      return () => {
+        clearTimeout(timeoutRef.current);
+      };
+    },
+    [dataURL],
+  );
 
-  useEffect(() => {
-    setTableRowsState(Array.from(
-      dataState,
-      (row) => (
-        <tr key={`${row.folderName}/${row.fileName}`}>
-          <td style={dataEntryStyle}>
-            {row.folderName}
-          </td>
-          <td style={dataEntryStyle}>
-            {row.fileName}
-          </td>
-          <td style={actionEntryStyle}>
-            <Button
-              variant="primary"
-              onClick={() => downloadFile(row.folderName, row.fileName)}
-            >
-              <Download />
-            </Button>
-          </td>
-        </tr>
-      ),
-    ));
-  }, [dataState]);
+  useEffect(
+    () => {
+      setTableRowsState(
+        Array.from(
+          dataState,
+          (row) => (
+            <tr key={`${row.folderName}/${row.fileName}`}>
+              <td style={dataEntryStyle}>
+                {row.folderName}
+              </td>
+              <td style={dataEntryStyle}>
+                {row.fileName}
+              </td>
+              <td style={actionEntryStyle}>
+                <Button
+                  variant="primary"
+                  onClick={() => downloadFile(row.folderName, row.fileName)}
+                >
+                  <Download />
+                </Button>
+              </td>
+            </tr>
+          ),
+        ),
+      );
+    },
+    [dataState],
+  );
 
   return (
     <Container fluid>
-      <Row noGutters className="align-items-end">
+      <Row className="align-items-end">
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
@@ -142,7 +150,7 @@ function ArchivedFiles({ dataURL }) {
           </p>
         </Col>
       </Row>
-      <Row noGutters className="align-items-start">
+      <Row className="align-items-start">
         <Col>
           <Table striped bordered>
             <thead>

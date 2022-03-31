@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/pages/Utilization.jsx
  * @license Apache-2.0
  */
@@ -7,9 +7,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import TimeLineChart from '../segments/TimeLineChart';
 
 function Utilization({ inspectionAPI }) {
@@ -37,52 +37,63 @@ function Utilization({ inspectionAPI }) {
     }
   };
 
-  useEffect(() => {
-    fetchWIDSSensors();
-  }, []);
+  useEffect(
+    () => {
+      fetchWIDSSensors();
+    },
+    [],
+  );
 
-  useEffect(() => {
-    if (widsSensorsState.length === 0) {
-      setWIDSSensorIDOptions([]);
-      setSelSensorState('');
-    } else {
-      setWIDSSensorIDOptions(Array.from(
-        widsSensorsState,
-        (row) => (
-          <option key={row.wids_sensor_id} value={row.wids_sensor_id}>
-            {row.wids_sensor_id}
-          </option>
-        ),
-      ));
-      setSelSensorState(widsSensorsState[0].wids_sensor_id);
-    }
-  }, [widsSensorsState]);
+  useEffect(
+    () => {
+      if (widsSensorsState.length === 0) {
+        setWIDSSensorIDOptions([]);
+        setSelSensorState('');
+      } else {
+        setWIDSSensorIDOptions(
+          Array.from(
+            widsSensorsState,
+            (row) => (
+              <option key={row.wids_sensor_id} value={row.wids_sensor_id}>
+                {row.wids_sensor_id}
+              </option>
+            ),
+          ),
+        );
+        setSelSensorState(widsSensorsState[0].wids_sensor_id);
+      }
+    },
+    [widsSensorsState],
+  );
 
-  useEffect(() => {
-    if (inspectionAPI && selSensorState && selIntvlState) {
-      setCPUURLState(
-        `${inspectionAPI}/wids-sensors/${selSensorState}/cpu`
-        + `?hours=${selIntvlState}`,
-      );
-      setMemoryURLState(
-        `${inspectionAPI}/wids-sensors/${selSensorState}/memory`
-        + `?hours=${selIntvlState}`,
-      );
-      setDiskURLState(
-        `${inspectionAPI}/wids-sensors/${selSensorState}/disk`
-        + `?hours=${selIntvlState}`,
-      );
-    } else {
-      setCPUURLState(null);
-      setMemoryURLState(null);
-      setDiskURLState(null);
-    }
-  }, [selSensorState, selIntvlState]);
+  useEffect(
+    () => {
+      if (inspectionAPI && selSensorState && selIntvlState) {
+        setCPUURLState(
+          `${inspectionAPI}/wids-sensors/${selSensorState}/cpu`
+          + `?hours=${selIntvlState}`,
+        );
+        setMemoryURLState(
+          `${inspectionAPI}/wids-sensors/${selSensorState}/memory`
+          + `?hours=${selIntvlState}`,
+        );
+        setDiskURLState(
+          `${inspectionAPI}/wids-sensors/${selSensorState}/disk`
+          + `?hours=${selIntvlState}`,
+        );
+      } else {
+        setCPUURLState(null);
+        setMemoryURLState(null);
+        setDiskURLState(null);
+      }
+    },
+    [selSensorState, selIntvlState],
+  );
 
   return (
     <Container fluid>
-      <Jumbotron align="center">
-        <h1>Utilization Page</h1>
+      <div className="p-5 mb-4 rounded-3 bg-light text-dark text-center">
+        <h1 className="display-5 fw-bold">Utilization Page</h1>
         <br />
         <Container>
           <Row
@@ -130,7 +141,7 @@ function Utilization({ inspectionAPI }) {
             </Col>
           </Row>
         </Container>
-      </Jumbotron>
+      </div>
       <Row className="row-cols-1 row-cols-lg-3">
         <Col>
           <TimeLineChart

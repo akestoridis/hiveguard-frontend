@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,22 @@
 
 const TerserPlugin = require('terser-webpack-plugin');
 const { merge } = require('webpack-merge');
+
 const common = require('./webpack.common');
 
-module.exports = merge(common, {
-  mode: 'production',
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-      }),
-    ],
+module.exports = merge(
+  common,
+  {
+    mode: 'production',
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin(
+          {
+            extractComments: false,
+          },
+        ),
+      ],
+    },
   },
-});
+);

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/pages/PacketCounters.jsx
  * @license Apache-2.0
  */
@@ -7,9 +7,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import TimeBarChart from '../segments/TimeBarChart';
 
 function PacketCounters({ inspectionAPI }) {
@@ -76,88 +76,120 @@ function PacketCounters({ inspectionAPI }) {
     }
   };
 
-  useEffect(() => {
-    fetchWIDSSensors();
-    fetchPANIdentifiers();
-  }, []);
+  useEffect(
+    () => {
+      fetchWIDSSensors();
+      fetchPANIdentifiers();
+    },
+    [],
+  );
 
-  useEffect(() => {
-    if (widsSensorsState.length === 0) {
-      setWIDSSensorIDOptions([]);
-      setSelSensorState('');
-    } else {
-      setWIDSSensorIDOptions(Array.from(
-        widsSensorsState,
-        (row) => (
-          <option key={row.wids_sensor_id} value={row.wids_sensor_id}>
-            {row.wids_sensor_id}
-          </option>
-        ),
-      ));
-      setSelSensorState(widsSensorsState[0].wids_sensor_id);
-    }
-  }, [widsSensorsState]);
-
-  useEffect(() => {
-    if (panIdentifiersState.length === 0) {
-      setPANIDOptions([]);
-      setSelPANState('');
-    } else {
-      setPANIDOptions(Array.from(
-        panIdentifiersState,
-        (panid) => (
-          <option key={panid} value={panid}>
-            {panid}
-          </option>
-        ),
-      ));
-      setSelPANState(panIdentifiersState[0]);
-      fetchShortAddresses(panIdentifiersState[0]);
-    }
-  }, [panIdentifiersState]);
-
-  useEffect(() => {
-    if (shortAddressesState.length === 0) {
-      setShortAddressesOptions([]);
-      setSelShortState('');
-    } else {
-      setShortAddressesOptions(Array.from(
-        shortAddressesState,
-        (shortaddr) => (
-          <option key={shortaddr} value={shortaddr}>
-            {shortaddr}
-          </option>
-        ),
-      ));
-      setSelShortState(shortAddressesState[0]);
-    }
-  }, [shortAddressesState]);
-
-  useEffect(() => {
-    if (inspectionAPI && selSensorState && selIntvlState && selPANState) {
-      setPANURLState(
-        `${inspectionAPI}/packet-counters/?sensor=${selSensorState}`
-        + `&hours=${selIntvlState}&srcpanid=${selPANState}`,
-      );
-      if (selShortState) {
-        setDeviceURLState(
-          `${inspectionAPI}/packet-counters/?sensor=${selSensorState}`
-          + `&hours=${selIntvlState}&srcpanid=${selPANState}`
-          + `&srcshortaddr=${selShortState}`,
-        );
+  useEffect(
+    () => {
+      if (widsSensorsState.length === 0) {
+        setWIDSSensorIDOptions([]);
+        setSelSensorState('');
       } else {
+        setWIDSSensorIDOptions(
+          Array.from(
+            widsSensorsState,
+            (row) => (
+              <option key={row.wids_sensor_id} value={row.wids_sensor_id}>
+                {row.wids_sensor_id}
+              </option>
+            ),
+          ),
+        );
+        setSelSensorState(widsSensorsState[0].wids_sensor_id);
+      }
+    },
+    [widsSensorsState],
+  );
+
+  useEffect(
+    () => {
+      if (panIdentifiersState.length === 0) {
+        setPANIDOptions([]);
+        setSelPANState('');
+      } else {
+        setPANIDOptions(
+          Array.from(
+            panIdentifiersState,
+            (panid) => (
+              <option key={panid} value={panid}>
+                {panid}
+              </option>
+            ),
+          ),
+        );
+        setSelPANState(panIdentifiersState[0]);
+        fetchShortAddresses(panIdentifiersState[0]);
+      }
+    },
+    [panIdentifiersState],
+  );
+
+  useEffect(
+    () => {
+      if (shortAddressesState.length === 0) {
+        setShortAddressesOptions([]);
+        setSelShortState('');
+      } else {
+        setShortAddressesOptions(
+          Array.from(
+            shortAddressesState,
+            (shortaddr) => (
+              <option key={shortaddr} value={shortaddr}>
+                {shortaddr}
+              </option>
+            ),
+          ),
+        );
+        setSelShortState(shortAddressesState[0]);
+      }
+    },
+    [shortAddressesState],
+  );
+
+  useEffect(
+    () => {
+      if (inspectionAPI && selSensorState && selIntvlState && selPANState) {
+        setPANURLState(
+          `${inspectionAPI}/packet-counters/?sensor=${selSensorState}`
+          + `&hours=${selIntvlState}&srcpanid=${selPANState}`,
+        );
+        if (selShortState) {
+          setDeviceURLState(
+            `${inspectionAPI}/packet-counters/?sensor=${selSensorState}`
+            + `&hours=${selIntvlState}&srcpanid=${selPANState}`
+            + `&srcshortaddr=${selShortState}`,
+          );
+        } else {
+          setDeviceURLState(null);
+        }
+      } else {
+        setPANURLState(null);
         setDeviceURLState(null);
       }
-    } else {
-      setPANURLState(null);
-      setDeviceURLState(null);
-    }
-  }, [selSensorState, selIntvlState, selPANState, selShortState]);
+    },
+    [selSensorState, selIntvlState, selPANState, selShortState],
+  );
+
+  useEffect(
+    () => {
+      if (selPANState) {
+        fetchShortAddresses(selPANState);
+      } else {
+        setShortAddressesState([]);
+      }
+    },
+    [selPANState],
+  );
 
   return (
     <Container fluid>
-      <Jumbotron align="center">
-        <h1>Packet Counters Page</h1>
+      <div className="p-5 mb-4 rounded-3 bg-light text-dark text-center">
+        <h1 className="display-5 fw-bold">Packet Counters Page</h1>
         <br />
         <Container>
           <Row
@@ -235,7 +267,7 @@ function PacketCounters({ inspectionAPI }) {
             </Col>
           </Row>
         </Container>
-      </Jumbotron>
+      </div>
       <Row className="row-cols-1 row-cols-lg-2">
         <Col>
           <TimeBarChart

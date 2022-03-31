@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/segments/DiscoveredNodes.jsx
  * @license Apache-2.0
  */
@@ -64,54 +64,68 @@ function DiscoveredNodes({ dataURL }) {
     timeoutRef.current = setTimeout(fetchDataPeriodically, 30000);
   };
 
-  useEffect(() => {
-    if (dataURL) {
-      fetchDataPeriodically();
-    } else {
-      setFetchState(
-        `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
-      );
-    }
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, [dataURL]);
+  useEffect(
+    () => {
+      if (dataURL) {
+        fetchDataPeriodically();
+      } else {
+        setFetchState(
+          `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
+        );
+      }
+      return () => {
+        clearTimeout(timeoutRef.current);
+      };
+    },
+    [dataURL],
+  );
 
-  useEffect(() => {
-    if (dataState.table) {
-      setTableRowsState(Array.from(
-        dataState.table,
-        (row) => (
-          <tr key={row.shortaddr}>
-            <td style={dataEntryStyle}>
-              {row.shortaddr}
-            </td>
-            <td style={dataEntryStyle}>
-              {row.extendedaddr}
-            </td>
-            <td style={dataEntryStyle}>
-              {row.nwkdevtype}
-            </td>
-          </tr>
-        ),
-      ));
-    } else {
-      setTableRowsState([]);
-    }
-    if (dataState.graph) {
-      setGraphDefState(dataState.graph);
-    } else {
-      setGraphDefState('digraph {}');
-    }
-  }, [dataState]);
+  useEffect(
+    () => {
+      if (dataState.table) {
+        setTableRowsState(
+          Array.from(
+            dataState.table,
+            (row) => (
+              <tr key={row.shortaddr}>
+                <td style={dataEntryStyle}>
+                  {row.shortaddr}
+                </td>
+                <td style={dataEntryStyle}>
+                  {row.extendedaddr}
+                </td>
+                <td style={dataEntryStyle}>
+                  {row.nwkdevtype}
+                </td>
+              </tr>
+            ),
+          ),
+        );
+      } else {
+        setTableRowsState([]);
+      }
+      if (dataState.graph) {
+        setGraphDefState(dataState.graph);
+      } else {
+        setGraphDefState('digraph {}');
+      }
+    },
+    [dataState],
+  );
 
-  useEffect(() => {
-    graphviz('#topologyGraph', { useWorker: false }).renderDot(graphDefState);
-  }, [graphDefState]);
+  useEffect(
+    () => {
+      graphviz(
+        '#topologyGraph',
+        { useWorker: false },
+      ).renderDot(graphDefState);
+    },
+    [graphDefState],
+  );
 
   return (
     <Container fluid>
-      <Row noGutters className="align-items-end">
+      <Row className="align-items-end">
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
@@ -131,7 +145,7 @@ function DiscoveredNodes({ dataURL }) {
           </p>
         </Col>
       </Row>
-      <Row noGutters className="align-items-start">
+      <Row className="align-items-start">
         <Col>
           <Table striped bordered>
             <thead>

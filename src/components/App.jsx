@@ -1,12 +1,13 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/App.jsx
  * @license Apache-2.0
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import NavigationBar from './segments/NavigationBar';
 import Home from './pages/Home';
 import Utilization from './pages/Utilization';
@@ -19,94 +20,60 @@ import Archive from './pages/Archive';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 
-function App(props) {
+function App({ inspectionAPI, aggregationAPI, retentionAPI }) {
   return (
     <BrowserRouter>
       <NavigationBar />
-      <Switch>
+      <Routes>
         <Route
-          exact
           path="/"
-          render={() => (
-            <Home
-              inspectionAPI={props.inspectionAPI}
-              aggregationAPI={props.aggregationAPI}
-            />
-          )}
+          element={
+            (
+              <Home
+                inspectionAPI={inspectionAPI}
+                aggregationAPI={aggregationAPI}
+              />
+            )
+          }
         />
         <Route
-          exact
           path="/utilization"
-          render={() => (
-            <Utilization
-              inspectionAPI={props.inspectionAPI}
-            />
-          )}
+          element={<Utilization inspectionAPI={inspectionAPI} />}
         />
         <Route
-          exact
           path="/topology"
-          render={() => (
-            <Topology
-              inspectionAPI={props.inspectionAPI}
-            />
-          )}
+          element={<Topology inspectionAPI={inspectionAPI} />}
         />
         <Route
-          exact
           path="/packet-counters"
-          render={() => (
-            <PacketCounters
-              inspectionAPI={props.inspectionAPI}
-            />
-          )}
+          element={<PacketCounters inspectionAPI={inspectionAPI} />}
         />
         <Route
-          exact
           path="/byte-counters"
-          render={() => (
-            <ByteCounters
-              inspectionAPI={props.inspectionAPI}
-            />
-          )}
+          element={<ByteCounters inspectionAPI={inspectionAPI} />}
         />
         <Route
-          exact
           path="/header-fields"
-          render={() => (
-            <HeaderFields
-              inspectionAPI={props.inspectionAPI}
-            />
-          )}
+          element={<HeaderFields inspectionAPI={inspectionAPI} />}
         />
         <Route
-          exact
           path="/battery-percentages"
-          render={() => (
-            <BatteryPercentages
-              inspectionAPI={props.inspectionAPI}
-            />
-          )}
+          element={<BatteryPercentages inspectionAPI={inspectionAPI} />}
         />
         <Route
-          exact
           path="/archive"
-          render={() => (
-            <Archive
-              inspectionAPI={props.inspectionAPI}
-              retentionAPI={props.retentionAPI}
-            />
-          )}
+          element={
+            (
+              <Archive
+                inspectionAPI={inspectionAPI}
+                retentionAPI={retentionAPI}
+              />
+            )
+          }
         />
-        <Route
-          exact
-          path="/about"
-          component={About}
-        />
-        <Route
-          component={NotFound}
-        />
-      </Switch>
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   );
 }

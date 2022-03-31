@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/segments/TimeLineChart.jsx
  * @license Apache-2.0
  */
@@ -11,16 +11,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { ArrowClockwise } from 'react-bootstrap-icons';
-import Chart from 'chart.js';
+import Chart from 'chart.js/auto';
+import 'chartjs-adapter-date-fns';
 
-function TimeLineChart({
-  dataURL,
-  dataLabel,
-  lineColor,
-  areaColor,
-  yMin,
-  yMax,
-}) {
+function TimeLineChart(
+  {
+    dataURL,
+    dataLabel,
+    lineColor,
+    areaColor,
+    yMin,
+    yMax,
+  },
+) {
   const canvasRef = useRef(null);
   const timeoutRef = useRef(null);
   const [fetchState, setFetchState] = useState('Fetching data...');
@@ -59,70 +62,84 @@ function TimeLineChart({
     timeoutRef.current = setTimeout(fetchDataPeriodically, 30000);
   };
 
-  useEffect(() => {
-    if (dataURL) {
-      fetchDataPeriodically();
-    } else {
-      setFetchState(
-        `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
-      );
-    }
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, [dataURL]);
+  useEffect(
+    () => {
+      if (dataURL) {
+        fetchDataPeriodically();
+      } else {
+        setFetchState(
+          `Unable to fetch data at ${new Date().toLocaleTimeString()}`,
+        );
+      }
+      return () => {
+        clearTimeout(timeoutRef.current);
+      };
+    },
+    [dataURL],
+  );
 
-  useEffect(() => {
-    const myScales = {
-      xAxes: [{
-        type: 'time',
-        ticks: {
-          maxTicksLimit: 20,
-        },
-      }],
-    };
-    if (yMin !== null && yMax !== null) {
-      myScales.yAxes = [{
-        ticks: {
-          suggestedMin: yMin,
-          suggestedMax: yMax,
-        },
-      }];
-    }
-    /* eslint-disable no-unused-vars */
-    const myChart = new Chart(canvasRef.current, {
-      type: 'line',
-      data: {
-        datasets: [{
-          data: dataState,
-          borderColor: lineColor,
-          backgroundColor: areaColor,
-        }],
-      },
-      options: {
-        legend: {
-          display: false,
-        },
-        elements: {
-          line: {
-            tension: 0,
+  useEffect(
+    () => {
+      const myChart = new Chart(
+        canvasRef.current,
+        {
+          type: 'line',
+          data: {
+            datasets: [
+              {
+                data: dataState,
+                fill: 'origin',
+                borderColor: lineColor,
+                backgroundColor: areaColor,
+              },
+            ],
           },
-          point: {
-            radius: 2,
+          options: {
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            elements: {
+              line: {
+                tension: 0,
+              },
+              point: {
+                radius: 2,
+              },
+            },
+            animation: {
+              duration: 0,
+            },
+            scales: {
+              x: {
+                type: 'time',
+                ticks: {
+                  maxTicksLimit: 20,
+                  color: 'rgba(0, 0, 0, 1.0)',
+                },
+              },
+              y: {
+                suggestedMin: yMin,
+                suggestedMax: yMax,
+                ticks: {
+                  color: 'rgba(0, 0, 0, 1.0)',
+                },
+              },
+            },
           },
         },
-        animation: {
-          duration: 0,
-        },
-        scales: myScales,
-      },
-    });
-    /* eslint-enable no-unused-vars */
-  }, [dataState]);
+      );
+      return () => {
+        myChart.destroy();
+      };
+    },
+    [dataState],
+  );
 
   return (
     <Container fluid>
-      <Row noGutters className="align-items-end">
+      <Row className="align-items-end">
         <Col xs={7}>
           <p style={{ textAlign: 'left' }}>
             <b style={{ verticalAlign: 'bottom', fontSize: 'x-large' }}>
@@ -142,7 +159,7 @@ function TimeLineChart({
           </p>
         </Col>
       </Row>
-      <Row noGutters className="align-items-start">
+      <Row className="align-items-start">
         <Col>
           <canvas ref={canvasRef} />
         </Col>

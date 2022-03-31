@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,11 +55,9 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            generator: (content) => svgToMiniDataURI(content.toString()),
-          },
+        type: 'asset/inline',
+        generator: {
+          dataUrl: (content) => svgToMiniDataURI(content.toString()),
         },
       },
     ],
@@ -68,33 +66,37 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new HTMLWebpackPlugin({
-      template: path.join(SRC_DIR, 'index.html'),
-      inject: true,
-      favicon: path.join(SRC_DIR, 'favicon.ico'),
-      minify: {
-        collapseWhitespace: true,
-        removeComments: false,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true,
-      },
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.join(
-            __dirname,
-            'node_modules',
-            '@hpcc-js',
-            'wasm',
-            'dist',
-            'graphvizlib.wasm',
-          ),
-          to: DIST_DIR,
+    new HTMLWebpackPlugin(
+      {
+        template: path.join(SRC_DIR, 'index.html'),
+        inject: true,
+        favicon: path.join(SRC_DIR, 'favicon.ico'),
+        minify: {
+          collapseWhitespace: true,
+          removeComments: false,
+          removeRedundantAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          useShortDoctype: true,
         },
-      ],
-    }),
+      },
+    ),
+    new CopyPlugin(
+      {
+        patterns: [
+          {
+            from: path.join(
+              __dirname,
+              'node_modules',
+              '@hpcc-js',
+              'wasm',
+              'dist',
+              'graphvizlib.wasm',
+            ),
+            to: DIST_DIR,
+          },
+        ],
+      },
+    ),
   ],
 };

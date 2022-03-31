@@ -1,5 +1,5 @@
 /*!
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  * hiveguard-frontend/src/components/pages/Topology.jsx
  * @license Apache-2.0
  */
@@ -7,9 +7,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import DiscoveredNodes from '../segments/DiscoveredNodes';
 
 function Topology({ inspectionAPI }) {
@@ -35,42 +35,53 @@ function Topology({ inspectionAPI }) {
     }
   };
 
-  useEffect(() => {
-    fetchPANIdentifiers();
-  }, []);
+  useEffect(
+    () => {
+      fetchPANIdentifiers();
+    },
+    [],
+  );
 
-  useEffect(() => {
-    if (panIdentifiersState.length === 0) {
-      setPANIDOptions([]);
-      setSelPANState('');
-    } else {
-      setPANIDOptions(Array.from(
-        panIdentifiersState,
-        (panid) => (
-          <option key={panid} value={panid}>
-            {panid}
-          </option>
-        ),
-      ));
-      setSelPANState(panIdentifiersState[0]);
-    }
-  }, [panIdentifiersState]);
+  useEffect(
+    () => {
+      if (panIdentifiersState.length === 0) {
+        setPANIDOptions([]);
+        setSelPANState('');
+      } else {
+        setPANIDOptions(
+          Array.from(
+            panIdentifiersState,
+            (panid) => (
+              <option key={panid} value={panid}>
+                {panid}
+              </option>
+            ),
+          ),
+        );
+        setSelPANState(panIdentifiersState[0]);
+      }
+    },
+    [panIdentifiersState],
+  );
 
-  useEffect(() => {
-    if (inspectionAPI && selPANState && selIntvlState) {
-      setDataURLState(
-        `${inspectionAPI}/topology/${selPANState}`
-        + `?hours=${selIntvlState}`,
-      );
-    } else {
-      setDataURLState(null);
-    }
-  }, [selPANState, selIntvlState]);
+  useEffect(
+    () => {
+      if (inspectionAPI && selPANState && selIntvlState) {
+        setDataURLState(
+          `${inspectionAPI}/topology/${selPANState}`
+          + `?hours=${selIntvlState}`,
+        );
+      } else {
+        setDataURLState(null);
+      }
+    },
+    [selPANState, selIntvlState],
+  );
 
   return (
     <Container fluid>
-      <Jumbotron align="center">
-        <h1>Topology Page</h1>
+      <div className="p-5 mb-4 rounded-3 bg-light text-dark text-center">
+        <h1 className="display-5 fw-bold">Topology Page</h1>
         <br />
         <Container>
           <Row
@@ -118,7 +129,7 @@ function Topology({ inspectionAPI }) {
             </Col>
           </Row>
         </Container>
-      </Jumbotron>
+      </div>
       <DiscoveredNodes
         dataURL={dataURLState}
       />

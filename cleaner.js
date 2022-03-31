@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,20 @@
 const path = require('path');
 const rimraf = require('rimraf');
 
-rimraf(path.join(__dirname, 'dist'), (err) => {
-  if (err) {
-    throw err;
-  }
-});
+rimraf(
+  path.join(__dirname, 'dist'),
+  (err) => {
+    if (err) {
+      throw err;
+    }
+  },
+);
 
-rimraf(path.join(__dirname, 'src', 'components', 'metadata.json'), (err) => {
-  if (err) {
-    throw err;
-  }
-});
+rimraf(
+  path.join(__dirname, 'src', 'components', 'metadata.json'),
+  (err) => {
+    if (err) {
+      throw err;
+    }
+  },
+);

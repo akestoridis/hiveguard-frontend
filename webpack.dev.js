@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,19 @@
  */
 
 const { merge } = require('webpack-merge');
+
 const common = require('./webpack.common');
 
-module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-    historyApiFallback: true,
-    host: '127.0.0.1',
-    port: 8080,
+module.exports = merge(
+  common,
+  {
+    mode: 'development',
+    devtool: 'inline-source-map',
+    devServer: {
+      hot: true,
+      historyApiFallback: true,
+      host: '127.0.0.1',
+      port: 8080,
+    },
   },
-});
+);
