@@ -101,8 +101,9 @@ function About() {
           Acknowledgments
         </h4>
         <p>
-          This project was supported in part by the CyLab Security and Privacy
-          Institute.
+          This project was supported in part by the Carnegie Mellon CyLab
+          Security and Privacy Institute and in part by Carnegie Mellon
+          University.
         </p>
         <br />
         <h4 className="fw-bold">
